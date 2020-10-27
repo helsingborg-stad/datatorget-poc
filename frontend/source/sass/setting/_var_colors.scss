@@ -1,0 +1,152 @@
+// ***************************************************************
+// *** Colors
+// ***************************************************************
+
+// Primary Colors
+$color-primary: #ae0b05 !default;
+$color-primary-dark: #770000 !default;
+$color-primary-light: #e84c31 !default;
+$color-primary-dimmed: $color-primary-dark !default; // To be deprecated
+$color-primary-alpha: rgba(247, 166, 0, 0.08);
+$color-primary-alpha-dimmed: rgba(232, 76, 49, 0.24);
+
+// Secondary Colors
+$color-secondary: #ec6701 !default;
+$color-secondary-dark: #b23700 !default;
+$color-secondary-light: #ff983e !default;
+$color-secondary-dimmed: $color-secondary-dark !default; // To be deprecated
+$color-secondary-alpha: rgba(247, 166, 0, 0.08);
+$color-secondary-alpha-dimmed: rgba(247, 166, 0, 0.24);
+
+// Tertiary Colors
+$color-tertiary: #cb0050 !default;
+$color-tertiary-dark: #cb0050 !default; //Needs correcting
+$color-tertiary-light: #cb0050 !default; //Needs correcting
+$color-tertiary-alpha: rgba(#cb0050, 0.08);
+$color-tertiary-alpha-dimmed: rgba(#cb0050, 0.24);
+
+// Monotone Colors
+$color-default: #f5f5f5 !default;
+$color-black: #000000 !default;
+$color-darkest: #3d3d3d !default;
+$color-darker: #565656 !default;
+$color-dark: #707070 !default;
+$color-light: #a3a3a3 !default;
+$color-lighter: #e5e5e5 !default;
+$color-lightest: #fcfcfc !default;
+$color-white: #ffffff !default;
+
+$color-default-dimmed: #eee !default;
+$color-default-dark: #dadada !default;
+$color-default-darker: #3d3d3d !default;
+$color-default-alpha: rgba(112, 112, 112, 0.08);
+$color-default-alpha-dimmed: rgba(112, 112, 112, 0.24);
+
+// Disabled colors
+$color-disabled: $color-default !default;
+$color-disabled-text: $color-dark;
+$color-gray-detail: $color-light;
+$color-disabled-bg: $color-lighter !default;
+$color-disabled-text: $color-base-disabled !default;
+$color-disabled-border: $color-black !default;
+
+$color-gray: $color-light !default; // To be deprecated
+$color-gray-light: $color-lighter !default; // To be deprecated
+$color-gray-lighter: $color-lightest !default; // To be deprecated
+
+$color-success: #91d736 !default;
+$color-danger: #d73740 !default;
+$color-info: #3d3d3d !default;
+$color-warning: #efbb21 !default;
+$color-in-action: #ffa900 !default;
+
+// Text colors
+$color-success-text: $color-black !default; 
+$color-danger-text: $color-white !default;
+$color-info-text: $color-white !default;
+$color-warning-text: $color-black !default;
+
+$color-base: rgba($color-black, 0.96) !default;
+$color-base-secondary: rgba($color-black, 0.54) !default;
+$color-base-disabled: rgba($color-black, 0.37) !default;
+
+$color-base-invert: $color-white !default;
+$color-base-invert-secondary: rgba($color-white, 0.75) !default;
+$color-base-invert-disabled: rgba($color-white, 0.5) !default;
+
+$color-heading: $color-base !default;
+$color-body: $color-base !default;
+$color-body-background: $color-default !default;
+//$color-body-background: $color-white !default;
+
+$color-link: $color-black !default;
+$color-link-hover: $color-darker;
+$color-link-visited: $color-black!default;
+$color-link-visited-hover: $color-darker;
+
+$color-shadow: rgba($color-black, 0.18) !default;
+$color-shadow-sharp: rgba($color-black, 1) !default;
+$color-border: $color-lighter;
+$color-code-background: #fdfcfb;
+$color-cream: #fdfcfb;
+$color-form-fields: #eeeeee;
+$color-form-fields-border: #dfdfdf;
+$color-form-fields-label: rgba(0,0,0,.6);
+$color-header-background: #f8f8f8 !default;
+$color-header-background-level-1: $color-lighter !default;
+$color-header-background-level-2: $color-white !default;
+$color-header-background-level-3: $color-primary !default;
+
+// Menu Colors
+$color-menu-background: $color-white !default;
+$color-menu-separator: $color-lighter !default;
+$color-menu-active-indicator: $color-lighter !default;
+$color-menu-active-background: $color-lightest !default;
+$color-menu-text: $color-black;
+$color-menu-active-indicator-horizontal: $color-primary-dimmed !default;
+$color-menu-text-horizontal: $color-black;
+
+// Navigation Colors
+$color-nav-background: $color-lightest !default;
+$color-nav-item-text: $color-base-secondary !default;
+$color-nav-item-text-active: $color-black !default;
+$color-nav-top-accent: $color-primary !default;
+$color-nav-active-accent: $color-primary !default;
+
+// Component Colors
+$color-image-placeholder-background: $color-default !default;
+$color-image-placeholder-border: $color-lighter !default;
+$color-image-placeholder-label: $color-darker !default;
+$color-image-placeholder-icon: $color-darker !default;
+
+$color-card-background: $color-white !default;
+$color-card-background-dark: $color-body-background !default;
+
+$color-notice-text-default: $color-white !default;
+
+$color-breadcrumb-active: $color-light !default;
+$color-breadcrumb-icon: $color-black !default;
+$color-breadcrumb: $color-black !default;
+
+$color-paper-background: $color-white !default;
+
+$color-table-background: $color-white !default;
+$color-table-background-odd: $color-lightest !default;
+$color-table-track-background: $color-white !default;
+$color-table-track-control: $color-lightest !default;
+$color-table-gradient: $color-white !default;
+$color-table-heading: $color-light !default;
+$color-table-body: $color-black !default;
+$color-table-border: $color-lighter !default;
+$table-heading-font-weight: bold !default;
+
+$color-component-doc-background: #191c3c !default;
+
+$color-comment-bubble-bg-dark: #f5f5f5 !default;
+$color-comment-bubble-bg-light: $color-white !default;
+$color-comment-date: $color-light !default;
+
+$color-footer-background: #efefef;
+
+$color-code-sidebar: $color-default-darker !default;
+$color-code-button: $color-default-darker !default;

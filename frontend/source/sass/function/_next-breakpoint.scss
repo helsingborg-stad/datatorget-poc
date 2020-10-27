@@ -1,0 +1,15 @@
+@function next-breakpoint($breakpoint) {
+    @if map-has-key($breakpoints-map, $breakpoint) {
+        $last: length($breakpoints-map);
+        $current: index(map-keys($breakpoints-map), $breakpoint);
+
+        @if ($current == $last) {
+            @return null;
+        }
+
+        @return nth(map-keys($breakpoints-map), $current + 1);
+
+    } @else {
+        @return null;
+    }
+}

@@ -1,0 +1,8 @@
+$alignments: left, right, center, justify, initial, inherit;
+
+@each $alignment in $alignments {
+
+    .u-text-align--#{$alignment} {
+        text-align: $alignment;
+    }
+}

@@ -1,0 +1,287 @@
+// BUTTON
+.c-button {
+    display: inline-block;
+    vertical-align: middle;
+    text-decoration: none;
+    cursor: pointer;
+    line-height: 1;
+    font-weight: 500;
+    background-color: transparent;
+    border: none;
+    transition: 150ms background-color; 
+
+    &__label {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    &--lg {
+        @include button-size(11px, 20px, $font-size-btn-lg, $font-size-btn-lg-line-height, 12.5px);
+        font-size: $font-size-btn-lg;
+    }
+
+    &--md {
+        @include button-size(0.7em, 1em, $font-size-btn-md, $font-size-btn-md-line-height, 7.5px);
+        font-size: $font-size-btn-md;
+    }
+
+    &--sm {
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        @include button-size(0.7em, 1em, $font-size-btn-sm, $font-size-btn-sm-line-height, 7.5px);
+        font-size: $font-size-btn-sm;
+    }
+
+    &[disabled="true"] {
+
+        border-color: $color-disabled;
+        background-color: $color-disabled;
+        color: $color-disabled-text;
+        cursor: not-allowed;
+
+        * {
+            color: $color-disabled-text;
+        }
+
+        &:hover {
+            background-color: $color-disabled;
+            box-shadow: none;
+        }
+    }
+}
+
+// Only text
+
+.c-button__basic {
+    border: none;
+    box-shadow: none;
+
+    &--primary {
+        color: $color-primary-dimmed;
+
+        &:hover {
+            background-color: $color-primary-alpha;
+        }
+
+        &:focus {
+            background-color:$color-primary-alpha-dimmed;
+        }
+    }
+
+    &--secondary {
+        color: $color-secondary-dimmed;
+
+        &:hover {
+            background-color: $color-secondary-alpha;
+        }
+
+        &:focus {
+            background-color:$color-secondary-alpha-dimmed;
+        }
+    }
+
+    &--default {
+        color: #3d3d3d;
+
+        &:hover {
+            background-color: $color-default-alpha;
+        }
+
+        &:focus {
+            background-color:$color-default-alpha-dimmed;
+        }
+    }
+}
+
+// Background and border
+
+.c-button__filled {
+    box-shadow:
+        0px 6px 8px rgba(98, 98, 98, 0.18),
+        0px 2px 2px rgba(98, 98, 98, 0.18),
+        0px 0px 2px rgba(98, 98, 98, 0.18)
+    ;
+
+    &--primary {
+        background-color: $color-primary;
+        color: $color-white;
+
+        &:visited,
+        &:active,
+        &:hover,
+        &:visited:hover {
+            color: $color-white;
+        }
+
+        &:hover {
+            background-color: $color-primary-light;
+        }
+    }
+
+    &--secondary {
+        background-color: $color-secondary;
+        color: #3d3d3d;
+
+        &:visited,
+        &:active,
+        &:hover,
+        &:visited:hover {
+            color: #3d3d3d;
+        }
+
+        &:hover {
+            background-color: $color-secondary-light;
+        }
+    }
+
+    &--default {
+        background-color: $color-default;
+        color: #3d3d3d;
+
+        &:visited,
+        &:active,
+        &:hover,
+        &:visited:hover  {
+            color: #3d3d3d;
+        }
+
+        &:hover {
+            background-color: $color-default-dimmed;
+        }
+    }
+}
+
+// No background, only border
+
+.c-button__outlined {
+
+    &--primary {
+        border: 2px solid $color-primary;
+        @extend .c-button__basic--primary;
+        color: #3d3d3d;
+
+        &:visited,
+        &:active,
+        &:hover,
+        &:visited:hover {
+            color: #3d3d3d;
+        }
+
+        &:hover {
+            background-color: $color-primary-alpha;
+        }
+
+        &:focus {
+            background-color:$color-primary-alpha-dimmed;
+        }
+    }
+
+    &--secondary {
+        border: 2px solid $color-secondary-dimmed;
+        @extend .c-button__basic--secondary;
+        color: #3d3d3d;
+
+        &:visited,
+        &:active,
+        &:hover,
+        &:visited:hover {
+            color: #3d3d3d;
+        }
+
+        &:hover {
+            background-color: $color-secondary-alpha;
+        }
+
+        &:focus {
+            background-color:$color-secondary-alpha-dimmed;
+        }
+    }
+
+    &--default {
+        border: 2px solid #a3a3a3;
+        @extend .c-button__basic--default;
+        color:#3d3d3d;
+
+        &:visited,
+        &:active,
+        &:hover,
+        &:visited:hover {
+            color: #3d3d3d;
+        }
+
+        &:hover {
+            background-color: $color-default-alpha;
+        }
+
+        &:focus {
+            background-color:$color-default-alpha-dimmed;
+        }
+    }
+}
+
+// Styling for buttons with both text and an icon
+
+.c-button__label-icon {
+    order: 2;
+    margin-left: 0.5rem;
+
+    &--reverse {
+        order: 1;
+        margin-right: 0.5rem;
+    }
+}
+
+.c-button__label-text {
+    order: 1;
+
+    &--reverse {
+        order: 2;
+    }
+}
+
+// Icon override
+
+.c-button {
+
+    &--sm .material-icons i {
+        font-size: $font-size-btn-sm;
+    }
+
+    &--md .material-icons span i {
+        font-size: $font-size-btn-md;
+    }
+
+    &--lg .material-icons i {
+        font-size: $font-size-btn-lg;
+    }
+}
+
+.c-button .material-icons {
+    padding: 0;
+    font-weight: 500;
+}
+
+.c-button__toggle {
+    @extend .c-button__filled--default;
+    color: $color-info-text;
+
+    &[aria-pressed="true"] {
+        color: $color-primary-dimmed;
+    }
+}
+
+.c-button__icon-size {
+
+    &--sm {
+        @include button-size(0.5em, 0.5em, 1.125em, $font-size-btn-lg-line-height, 7.5px);
+    }
+
+    &--md {
+        @include button-size(0.5em, 0.5em, 1.375em, $font-size-btn-lg-line-height, 7.5px);
+    }
+
+    &--lg {
+        @include button-size(0.5em, 0.5em, 1.5em, $font-size-btn-lg-line-height, 12.5px);
+    }
+}

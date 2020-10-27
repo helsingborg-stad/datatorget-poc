@@ -1,0 +1,43 @@
+$position_utils: (
+    (
+        name: "position",
+        modifiers: (
+            static: (position: static),
+            relative: (position: relative),
+            absolute: (position: absolute),
+            fixed: (position: fixed),
+            sticky: (position: sticky)
+        )
+    ),
+    (
+        name: "fixed",
+        modifiers: (
+            top: (
+                position: fixed,
+                top: 0,
+                right: 0,
+                left: 0,
+                z-index: $level-10
+            ),
+            bottom: (
+                position: fixed,
+                bottom: 0,
+                right: 0,
+                left: 0,
+                z-index: $level-10
+            )
+        )
+    ),
+    (
+        name: "sticky",
+        modifiers: (
+            top: (
+                position: sticky,
+                top: 0,
+                z-index: $level-10
+            )
+        )
+    )
+);
+
+@include build-utilities($position_utils);

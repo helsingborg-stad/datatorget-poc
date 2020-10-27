@@ -1,0 +1,10 @@
+$clearfix-utils:
+    (name: "clearfix::after",
+    default: (
+        display: block,
+        content: '""',
+        clear: both
+    ),
+);
+
+@include build-utilities($clearfix-utils);

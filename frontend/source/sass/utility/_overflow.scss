@@ -1,0 +1,11 @@
+$modifiers: ();
+@each $modifier in $overflows {
+    $modifiers: map-merge($modifiers, ($modifier: ("overflow": #{$modifier})))
+}
+
+$overflow-utils:(
+    "name": "overflow",
+    "modifiers": $modifiers
+);
+
+@include build-utilities($overflow-utils)

@@ -1,0 +1,43 @@
+{
+    "name": "helsingborg-stad/styleguide",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Sebastian Thulin",
+            "email": "sebastian.thulin@helsingborg.se"
+        },
+        {
+            "name": "Nikolas Ramstedt",
+            "email": "nikolas.ramstedt@helsingborg.se"
+        },
+        {
+            "name": "Jonatan Hanson",
+            "email": "jonatan.hanson@helsingborg.se"
+        },
+        {
+            "name": "Johan Silvergrund",
+            "email": "johan.silvergrund@hiq.se"
+        }
+    ],
+    "minimum-stability" : "dev",
+    "repositories": [
+        {
+            "type":"composer",
+            "url":"https://packagist.org"
+        },
+        {
+            "type":"composer",
+            "url":"https://wpackagist.org"
+        }
+    ],
+    "require": {
+        "erusev/parsedown": "^1.7",
+        "helsingborg-stad/blade-engine-wrapper": "dev-master"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "sh setup.sh"
+        ]
+    }
+}

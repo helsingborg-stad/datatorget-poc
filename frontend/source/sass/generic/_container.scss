@@ -1,0 +1,39 @@
+.container {
+    width: calc( 100% - #{map-get($spacers, "4")});
+    max-width: $container-width;
+    margin: 0 auto;
+
+    &--wide {
+        max-width: $container-width-wide;
+    }
+
+    &--full {
+        max-width: initial;
+    }
+
+    &--home {
+        min-height: calc(90vh - 140px);
+        padding-left: $base * 17;
+        padding-right: $base * 17;
+    }
+
+    &--doc {
+        min-height: calc(90vh - 140px);
+        padding: map-get($spacers, "8");
+    }
+}
+
+@include mq(map_get($breakpoints-map, "xs"), "md") {
+
+    .container {
+
+        &--home {
+            padding: 20px;
+        }
+
+        &--doc {
+            margin-left: 0;
+            padding: 20px
+        }
+    }
+}

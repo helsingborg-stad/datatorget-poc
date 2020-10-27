@@ -1,0 +1,139 @@
+.c-code {
+    border-radius: $border-radius-md;
+    margin: 16px 0;
+    overflow: hidden;
+
+    .code-toolbar {
+        overflow: auto;
+        background-color: $color-lighter;
+    }
+
+    &__pre {
+        margin: 0;
+    }
+
+    &__toggle {
+
+        .c-button__toggle {
+            color: $color-lighter;
+
+            &[aria-pressed="true"] {
+                color: $color-default-dimmed;
+
+            }
+
+            &:hover {
+                color: $color-black;
+            }
+        }
+    }
+}
+
+.markup-preview {
+    padding: map-get($spacers, "3");
+    border-bottom: 0;
+    border-radius: 5px;
+}
+
+.markup-preview--align-x {
+    padding: map-get($spacers, "3") 0;
+}
+
+div.code-toolbar>.toolbar a, div.code-toolbar>.toolbar button, div.code-toolbar>.toolbar span {
+
+    @extend .c-button;
+    @extend .c-button__filled;
+    @extend .c-button__filled--primary;
+    @extend .c-button--sm;
+
+}
+
+.toolbar-item {
+    position: absolute;
+    top: -40px;
+    right: -3px;
+}
+
+.selected-components-loader {
+    position:absolute;
+    top:3px;
+}
+
+.selected-components {
+
+    width:90%;
+
+    .component-list {
+        text-transform: uppercase;
+        cursor: not-allowed;
+        margin-right:10px;
+        margin-bottom:10px;
+        padding: 3px 8px;
+        animation: componentListFadeIn 1s linear;
+        animation-fill-mode: both;
+        background:none;
+    }
+
+    .component-list .c-icon {
+        margin-right: 3px;
+        position: relative;
+        top: 2px;
+    }
+
+    @for $i from 1 through 10 {
+
+        .component-list:nth-child(#{$i}n) {
+            animation-delay: #{$i * 0.1}s;
+        }
+    }
+
+}
+@keyframes componentListFadeIn {
+
+    0% {
+        opacity: 0;
+    }
+
+    70% {
+        opacity: 0;
+        transform: scale(1);
+    }
+
+    85% {
+        opacity: 1;
+        transform: scale(1.08);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.breaklines {
+
+    code {
+        word-break: break-all;
+    }
+
+}
+
+.c-button--copy-compiled-link {
+    position: absolute;
+    top: -40px;
+    right: 0px;
+}
+
+.online-compiled-components {
+
+    animation: componentListFadeIn 1s linear;
+    animation-fill-mode: both;
+    background-color: #f5f2f0;
+    padding:15px;
+
+    #compiledCSS {
+        display: block;
+        word-break: break-all;
+        font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+        font-size: 1em;
+    }
+}

@@ -1,0 +1,48 @@
+a, .link {
+    color: $color-link;
+    text-decoration-style: underline;
+
+    i {
+        text-decoration: none;
+    }
+
+    &:hover {
+        color: $color-link-hover;
+        text-decoration-style: solid;
+    }
+
+    &:active, &:focus {
+        text-decoration: none;
+    }
+
+    &:active {
+        color: lighten($color-link-hover, 10%);
+    }
+
+    &:visited {
+        color: $color-link-visited;
+
+        &:hover {
+            color: $color-link-visited-hover;
+        }
+
+        &:active {
+            color: lighten($color-link-visited-hover, 10%);
+        }
+    }
+
+    &.c-link--tag {
+        background-color: $color-gray-light;
+        padding: $base/2;
+        margin-right: $base/2;
+        border-radius: $border-radius-sm;
+        text-decoration: none;
+        color: $color-base;
+        font-size: $font-size-meta;
+
+        &:hover {
+            color: $color-white;
+            background-color: $color-gray;
+        }
+    }
+}
