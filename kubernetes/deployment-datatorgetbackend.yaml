@@ -1,0 +1,111 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: datatorgetbackend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: datatorgetbackend
+  template:
+    metadata:
+      labels:
+        app: datatorgetbackend
+    spec:
+      containers:
+      - name: bokningsapi
+        image: datatorgetpoc/bokningsapi
+        resources:
+          limits:
+            memory: "64Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 30001
+      - name: kundapi
+        image: datatorgetpoc/kundapi
+        resources:
+          limits:
+            memory: "64Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 30002
+        env:
+        - name: MESSAGE_SERVICE_HOST
+          value: localhost #datatorgetbackendsvc
+        - name: MESSAGE_SERVICE_PORT
+          value: "5672"
+        - name: MESSAGE_SERVICE_USERNAME
+          value: "datatorget"
+        - name: MESSAGE_SERVICE_PASSWORD
+          value: "datatorget"
+        - name: MESSAGE_SERVICE_ENABLED
+          value: "True"
+      - name: rabbitmq
+        image: rabbitmq:management
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        ports:
+          - name: http
+            protocol: TCP
+            containerPort: 15672
+          - name: amqp
+            protocol: TCP
+            containerPort: 5672
+        env:
+          - name: MY_POD_NAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.name
+          - name: MY_POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          - name: RABBITMQ_DEFAULT_USER
+            value: datatorget
+          - name: RABBITMQ_DEFAULT_PASS
+            value: datatorget
+          - name: RABBITMQ_USE_LONGNAME
+            value: "true"
+          - name: K8S_SERVICE_NAME
+            value: rabbitmq
+        #   - name: RABBITMQ_NODENAME
+        #     value: rabbit@$(MY_POD_NAME).$(K8S_SERVICE_NAME).$(MY_POD_NAMESPACE).svc.cluster.local
+        #   - name: K8S_HOSTNAME_SUFFIX
+        #     value: .$(K8S_SERVICE_NAME).$(MY_POD_NAMESPACE).svc.cluster.local
+      - name: mongo
+        image: mongo
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 27017
+        env:
+        - name: MONGO_INITDB_ROOT_USERNAME
+          value: "datatorget"
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          value: "datatorget"
+        - name: MONGO_INITDB_DATABASE
+          value: "poc"
+      - name: mongo-express
+        image: mongo-express
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8081
+        env:
+        - name: ME_CONFIG_BASICAUTH_USERNAME    
+          value: "datatorget"
+        - name: ME_CONFIG_BASICAUTH_PASSWORD
+          value: "datatorget"
+        - name: ME_CONFIG_MONGODB_ADMINUSERNAME
+          value: "datatorget"
+        - name: ME_CONFIG_MONGODB_ADMINPASSWORD
+          value: "datatorget"
+        - name: ME_CONFIG_MONGODB_SERVER
+          value: "localhost"

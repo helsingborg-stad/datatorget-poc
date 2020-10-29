@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>bokningsapi</name>
+    </assembly>
+    <members>
+        <member name="T:bokningsapi.code.Resource">
+            <summary>
+            Hej hopp 2
+            </summary>
+        </member>
+        <member name="M:bokningsapi.controllers.BookingController.List(System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+            Hej hopp
+            </summary>
+            <param name="startTime"></param>
+            <param name="endTime"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
