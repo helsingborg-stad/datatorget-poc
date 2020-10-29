@@ -4,7 +4,7 @@
 <div class="page">
     <div class="o-container">
         <section class="u-margin__top--8">
-            <article class="article">
+            <article class="article u-display--flex u-align-content--center u-flex-direction--column">
                 @yield('article')
             </article>
         </section>

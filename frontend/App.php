@@ -38,10 +38,13 @@ class App
 
         //Current page 
         $data['pageNow']                        = $this->page;
+        $data['action']                         = isset($_GET['action']) ? $_GET['action'] : false; 
+        $data['pagination']                     = isset($_GET['pagination']) ? $_GET['pagination'] : 1; 
 
         //Component library
         $data['componentLibraryIsInstalled']    = \HbgStyleGuide\Helper\Enviroment::componentLibraryIsInstalled();
         $data['isLocalDomain']                  = \HbgStyleGuide\Helper\Enviroment::isLocalDomain();
+        
         //Render page 
         $view = new \HbgStyleGuide\View();
 
