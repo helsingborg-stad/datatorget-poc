@@ -34,7 +34,7 @@ spec:
         - containerPort: 30002
         env:
         - name: MESSAGE_SERVICE_HOST
-          value: localhost #datatorgetbackendsvc
+          value: localhost
         - name: MESSAGE_SERVICE_PORT
           value: "5672"
         - name: MESSAGE_SERVICE_USERNAME
@@ -93,10 +93,6 @@ spec:
             value: "true"
           - name: K8S_SERVICE_NAME
             value: rabbitmq
-        #   - name: RABBITMQ_NODENAME
-        #     value: rabbit@$(MY_POD_NAME).$(K8S_SERVICE_NAME).$(MY_POD_NAMESPACE).svc.cluster.local
-        #   - name: K8S_HOSTNAME_SUFFIX
-        #     value: .$(K8S_SERVICE_NAME).$(MY_POD_NAMESPACE).svc.cluster.local
       - name: mongo
         image: mongo
         resources:

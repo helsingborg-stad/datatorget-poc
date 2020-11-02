@@ -16,8 +16,18 @@ namespace kommunikationsapi.controllers
     {
         [HttpPost]
         [Route("skicka")]
-        public void Skicka(string mottagareEpost, string avsandare, string amne, string meddelandetext)
+        public void Skicka(string mottagareEpost, string avsandareEpost, string amne, string meddelandetext)
         {
+            var meddelande = new EpostMeddelande
+            {
+                Id = Guid.NewGuid().ToString(),
+                MottagareEpost = mottagareEpost,
+                AvsandareEpost = avsandareEpost,
+                Amne = amne,
+                Meddelandetext = meddelandetext
+            };
+
+            MailServer.Send(meddelande);
         }
 
         [HttpPost]
