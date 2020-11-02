@@ -22,11 +22,18 @@ class RegistreraKonto Extends BaseController {
     $req = (object) array_merge([
       'name' => false,
       'pnr' => false,
-      'email' => false,
+      'email' => false
     ], $req);
 
+    //Validate inputs
     if(!$this->validate::pnr($req->pnr)) {
       new Redirect('/registrera-konto', ['action' => 'registration-error-pnr']); 
+    }
+    if(!$this->validate::empty($req->name)) {
+      new Redirect('/registrera-konto', ['action' => 'registration-error-name']); 
+    }
+    if(!$this->validate::email($req->email)) {
+      new Redirect('/registrera-konto', ['action' => 'registration-error-email']); 
     }
     
     //Make req

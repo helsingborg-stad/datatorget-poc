@@ -5,12 +5,13 @@ namespace HbgStyleGuide\Controller;
 use \HbgStyleGuide\Helper\Redirect as Redirect; 
 use \HbgStyleGuide\Helper\Curl as Curl;
 use \HbgStyleGuide\Helper\Validate as Validate;
+use \HbgStyleGuide\Helper\User as User;
 
 abstract class BaseController {
 
-  protected $data;
+  public $data = [];
   protected $action = null;
-  protected $Validate; 
+  protected $validate; 
 
   /**
    * Define that __construct should exists in all classes inherit 
@@ -25,6 +26,34 @@ abstract class BaseController {
     //Trigger action 
     if(method_exists($child, "action".ucfirst($this->action))) {
       $this->{"action".ucfirst($this->action)}($_REQUEST); 
+    }
+
+    //Trigger global action
+    if(method_exists(__CLASS__, "action".ucfirst($this->action))) {
+      $this->{"action".ucfirst($this->action)}($_REQUEST); 
+    }
+
+    //Add usr obj
+    $this->data['user'] = $this->getUserData();
+  }
+
+  public function actionLogout() {
+    $user = new User();
+    $user->logout(); 
+    new Redirect('/', ['action' => 'logoutmsg']); 
+  }
+
+  /**
+   * Get userdata to view
+   *
+   * @return void
+   */
+  public function getUserData() {
+    $user = new User();
+    if($user->isAuthenticated()) {
+      return $user->get(); 
+    } else {
+      return false; 
     }
   }
 

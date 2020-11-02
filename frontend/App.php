@@ -24,7 +24,9 @@ class App
 
 
         $url = preg_replace('/\?.*/', '', $_SERVER['REQUEST_URI']);
-        $this->page = ($url !== "/") ? $url : $this->default;
+        $url = rtrim($url, '/'); 
+
+        $this->page = ($url !== "") ? $url : $this->default;
         
         $this->loadPage($blade);
     }

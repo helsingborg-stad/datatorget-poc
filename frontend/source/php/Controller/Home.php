@@ -4,12 +4,12 @@ namespace HbgStyleGuide\Controller;
 
 use \HbgStyleGuide\Helper\Redirect as Redirect; 
 use \HbgStyleGuide\Helper\Curl as Curl;
+use \HbgStyleGuide\Helper\User as User;
 
 class Home Extends BaseController {
+ 
   public function __construct() {
     parent::__construct(__CLASS__);
-
-    $this->data['controller'] = "höme"; 
   }
 
   /**
@@ -33,7 +33,12 @@ class Home Extends BaseController {
 
     //Check if is valid response
     if($curl->isValid) {
+
+      $user = new User();
+      $user->set($curl->response); 
+
       new Redirect('/boka'); 
+
     } else {
       new Redirect('/', ['action' => 'login-error']); 
     }

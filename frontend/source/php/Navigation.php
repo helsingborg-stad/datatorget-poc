@@ -2,6 +2,8 @@
 
 namespace HbgStyleGuide;
 
+use \HbgStyleGuide\Helper\User as User;
+
 class Navigation
 {
     private static $unlisted = array(
@@ -14,6 +16,7 @@ class Navigation
         'usage',
         'about'
     );
+
 
     private static $icons = array(
         'mixins' => 'local_bar',
@@ -31,8 +34,23 @@ class Navigation
      */
     public static function items($folder = "/", $response = array(), $includeChildren = true)
     {
+        $user = new User();
 
         $dirContents = scandir(VIEWS_PATH . $folder);
+
+        if(!$user->isAuthenticated()) {
+            $dirContents = array_diff($dirContents, [
+                'boka.blade.php',
+                'valj-lokal.blade.php',
+                'mitt-konto.blade.php'
+            ]);
+        } else {
+            $dirContents = array_diff($dirContents, [
+                'om-bokningsportalen.blade.php',
+                'registrera-konto.blade.php',
+                'boka.blade.php',
+            ]);
+        }
 
         if(is_array($dirContents) && !empty($dirContents)) {
             foreach($dirContents as $item) {
@@ -83,10 +101,20 @@ class Navigation
                             $response[$item]['children'] = false;                    
                         }
                     }
+
+
+
+                    
                 
                 }
             }
         }
+
+        if($user->isAuthenticated()) {
+            $nbr = count($response); 
+            $response[$nbr+1]['label'] = "Logga ut";
+            $response[$nbr+1]['href'] = "/?action=logout";
+        } 
 
         return $response;
     }

@@ -16,7 +16,10 @@ class View
         if(file_exists(__DIR__ . "/Controller/" . $view . ".php")) {
             $class = "HbgStyleGuide\\Controller\\".$view; 
             $obj = new $class;
+            return $obj->data; 
         }
+
+        return []; 
     }
 
     /**
@@ -25,28 +28,22 @@ class View
      */
     public function show($view, $data = array(), $blade)
     {
-
         $blade = $this->registerLayoutViewComposer($blade);
         $blade = $this->registerMarkdownViewComposer($blade);
 
         //Controller data
-        try { 
-            $controllerData = $this->loadControllerData($view); 
+        $controllerData = $this->loadControllerData($view); 
 
-        } catch (Throwable $e) {
-
-        }
-        
         //Run view
         try {
             $result = $blade->make(
                 'pages.' . $view,
-                $data
+                array_merge($data, $controllerData)
             )->render();
 
             $result = preg_replace('/(id|href)=""/', "", $result);
 
-            if(false && class_exists("tidy")) {
+            if(class_exists("tidy")) {
 
                 $tidy = new \tidy;
                 $tidy->parseString($result, array(

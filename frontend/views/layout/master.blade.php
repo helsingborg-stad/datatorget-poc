@@ -22,7 +22,7 @@
 
 </head>
 <body class="no-js">
-
+    
     @navbar([
         'logo' => '/assets/img/logotype.svg',
         'logoPosition' => 'left',
