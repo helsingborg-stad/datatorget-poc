@@ -9,6 +9,16 @@ class View
 {
     private $blade;
 
+    public function loadControllerData($view) {
+
+        $view = ucfirst(trim(str_replace(' ', '', ucwords(str_replace('-', ' ', $view))), "/"));
+
+        if(file_exists(__DIR__ . "/Controller/" . $view . ".php")) {
+            $class = "HbgStyleGuide\\Controller\\".$view; 
+            $obj = new $class;
+        }
+    }
+
     /**
      * @param $view
      * @param array $data
@@ -18,7 +28,16 @@ class View
 
         $blade = $this->registerLayoutViewComposer($blade);
         $blade = $this->registerMarkdownViewComposer($blade);
+
+        //Controller data
+        try { 
+            $controllerData = $this->loadControllerData($view); 
+
+        } catch (Throwable $e) {
+
+        }
         
+        //Run view
         try {
             $result = $blade->make(
                 'pages.' . $view,

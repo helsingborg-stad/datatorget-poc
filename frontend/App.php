@@ -19,6 +19,9 @@ class App
      */
     public function __construct($blade)
     {
+        //Config incl
+        require __DIR__ . '/config/microservice.php'; 
+
 
         $url = preg_replace('/\?.*/', '', $_SERVER['REQUEST_URI']);
         $this->page = ($url !== "/") ? $url : $this->default;
