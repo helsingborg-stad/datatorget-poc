@@ -51,6 +51,21 @@ spec:
             cpu: "250m"
         ports:
         - containerPort: 30003
+        env:
+        - name: SMTP_SERVICE_HOST
+          value: "smtp.sendgrid.net"
+        - name: SMTP_SERVICE_PORT
+          value: "587"
+        - name: SMTP_SERVICE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: secrets-datatorgetbackend
+              key: SMTP_USERNAME
+        - name: SMTP_SERVICE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: secrets-datatorgetbackend
+              key: SMTP_PASSWORD
       - name: betalningsapi
         image: datatorgetpoc/betalningsapi
         resources:
