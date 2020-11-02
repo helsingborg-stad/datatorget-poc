@@ -61,6 +61,13 @@ namespace kundapi.controllers
             return kunder.First();
         }
 
+        [HttpGet]
+        [Route("lista")]
+        public Kund[] Lista()
+        {
+            return _DataStore.ListaKunder();
+        }
+
         // [HttpGet]
         // [Route("test")]
         // public string Test()

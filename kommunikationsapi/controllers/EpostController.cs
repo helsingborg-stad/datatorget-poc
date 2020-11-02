@@ -51,13 +51,13 @@ namespace kommunikationsapi.controllers
 
         [HttpGet]
         [Route("avboka")]
-        public void Avboka(int id)
+        public void Avboka(string id)
         {
         }
 
         [HttpGet]
         [Route("sok")]
-        public EpostMeddelande[] SokPersonnr(string avsandareEpost, string mottagareEpost, string referens, string applikation)
+        public EpostMeddelande[] Sok(string avsandareEpost, string mottagareEpost, string referens, string applikation)
         {
             return new EpostMeddelande[0];
         }

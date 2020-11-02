@@ -53,5 +53,10 @@ namespace kundapi.code
             // TODO: Kontrollera vad som gick fel (exempelvis att ingen kund finns med aktuellt personnr)
             throw new Exception("HamtaKunderMedPersonnr: Något gick fel.");
         }
+
+        public static Kund[] ListaKunder()
+        {
+            return Kunder.Values.ToArray();
+        }
    }
 }
