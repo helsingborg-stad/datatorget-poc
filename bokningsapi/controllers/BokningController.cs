@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
+using System.Net;
 using Microsoft.Extensions.Logging;
 using bokningsapi.code;
 
@@ -47,7 +48,16 @@ namespace bokningsapi.controllers
         {
             var bokning = new Bokning(resursid, startTid, slutTid, kundnr);
             if (_DataStore.TryAddBokning(bokning))
+            {
+                if (!string.IsNullOrEmpty(_Config.BetalningsApi))
+                {
+                    using (var client = new WebClient())
+                    {
+                        client.DownloadString($"{_Config.BetalningsApi}/betalorder/skapa?applikation=bokning&referens={bokning.Bokningsnr}&beskrivning=bokning&belopp={bokning.Pris}&kundnr={bokning.Kundnr}");
+                    }
+                }
                 return bokning;
+            }
             else
                 return null;
         }
@@ -59,6 +69,23 @@ namespace bokningsapi.controllers
             if (_DataStore.TryGetBokning(bokningsnr, out var bokning))
             {
                 _DataStore.CancelBokning(bokning);
+                return bokning;
+            }
+            else
+                return null;
+        }
+
+        [HttpGet]
+        [Route("betala")]
+        public Bokning Betala(int bokningsnr, int belopp)
+        {
+            if (_DataStore.TryGetBokning(bokningsnr, out var bokning))
+            {
+                bokning.BeloppBetalt += belopp;
+                if (bokning.BeloppBetalt >= bokning.Pris)
+                    bokning.Betald = true;
+                else
+                    bokning.Betald = false;
                 return bokning;
             }
             else

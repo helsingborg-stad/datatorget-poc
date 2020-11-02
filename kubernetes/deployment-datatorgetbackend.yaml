@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: datatorgetbackend
+  name: deployment-datatorgetbackend
 spec:
   replicas: 1
   selector:
@@ -18,15 +18,18 @@ spec:
         resources:
           limits:
             memory: "64Mi"
-            cpu: "500m"
+            cpu: "250m"
         ports:
         - containerPort: 30001
+        env:
+        - name: BETALNINGSAPI
+          value: http://localhost:30004/api/v1
       - name: kundapi
         image: datatorgetpoc/kundapi
         resources:
           limits:
             memory: "64Mi"
-            cpu: "500m"
+            cpu: "250m"
         ports:
         - containerPort: 30002
         env:
@@ -40,12 +43,31 @@ spec:
           value: "datatorget"
         - name: MESSAGE_SERVICE_ENABLED
           value: "True"
+      - name: kommunikationsapi
+        image: datatorgetpoc/kommunikationsapi
+        resources:
+          limits:
+            memory: "64Mi"
+            cpu: "250m"
+        ports:
+        - containerPort: 30003
+      - name: betalningsapi
+        image: datatorgetpoc/betalningsapi
+        resources:
+          limits:
+            memory: "64Mi"
+            cpu: "250m"
+        ports:
+        - containerPort: 30004
+        env:
+        - name: BOKNINGSAPI
+          value: http://localhost:30001/api/v1
       - name: rabbitmq
         image: rabbitmq:management
         resources:
           limits:
             memory: "512Mi"
-            cpu: "500m"
+            cpu: "250m"
         ports:
           - name: http
             protocol: TCP
@@ -80,14 +102,20 @@ spec:
         resources:
           limits:
             memory: "128Mi"
-            cpu: "500m"
+            cpu: "250m"
         ports:
         - containerPort: 27017
         env:
         - name: MONGO_INITDB_ROOT_USERNAME
-          value: "datatorget"
+          valueFrom:
+            secretKeyRef:
+              name: secrets-datatorgetbackend
+              key: MONGO_USERNAME
         - name: MONGO_INITDB_ROOT_PASSWORD
-          value: "datatorget"
+          valueFrom:
+            secretKeyRef:
+              name: secrets-datatorgetbackend
+              key: MONGO_PASSWORD
         - name: MONGO_INITDB_DATABASE
           value: "poc"
       - name: mongo-express
@@ -95,7 +123,7 @@ spec:
         resources:
           limits:
             memory: "128Mi"
-            cpu: "500m"
+            cpu: "250m"
         ports:
         - containerPort: 8081
         env:

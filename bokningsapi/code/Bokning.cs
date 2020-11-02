@@ -14,7 +14,7 @@ namespace bokningsapi.code
         public int Kundnr { get; set; }
         public int Pris { get; set; }
         public int BeloppBetalt { get; set; }
-        public bool Bekraftad { get; set; }
+        public bool Betald { get; set; }
         public bool Avbokad { get; set; }
         public DateTime SenastUppdaterad { get; set; }
 
@@ -30,7 +30,7 @@ namespace bokningsapi.code
             Kundnr = kundnr;
             Pris = resurs.Timpris * Resurstider.Length;
             BeloppBetalt = 0;
-            Bekraftad = false;
+            Betald = false;
             Avbokad = false;
             SenastUppdaterad = DateTime.Now;
             StartTid = startTid;

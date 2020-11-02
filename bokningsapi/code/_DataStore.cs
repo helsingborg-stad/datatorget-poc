@@ -15,7 +15,6 @@ namespace bokningsapi.code
         static ConcurrentDictionary<int, Bokning> Bokningar;
         static ConcurrentDictionary<string, Resurstid> Tidsluckor;
         static SortedDictionary<string, Resurs> Resurser;
-        static SortedDictionary<string, ConcurrentDictionary<string, WebhookSubscription>> WebhookSubscriptions = new SortedDictionary<string, ConcurrentDictionary<string, WebhookSubscription>>();
 
         static int NastaBokningsnr = 0;
 
@@ -57,7 +56,6 @@ namespace bokningsapi.code
                 Bokningar.TryAdd(bokning.Bokningsnr, bokning);
             }
 
-            TriggerWebhook("bokning", bokning);
             return true;
         }
 
@@ -80,7 +78,6 @@ namespace bokningsapi.code
             bokning.SlutTid = slutTid;
             bokning.SenastUppdaterad = DateTime.Now;
 
-            TriggerWebhook("bokning", bokning);
             return true;
         }
 
@@ -91,54 +88,11 @@ namespace bokningsapi.code
 
             bokning.Avbokad = true;
             bokning.SenastUppdaterad = DateTime.Now;
-
-            TriggerWebhook("bokning", bokning);
         }
 
         public static bool TryAddResurs(Resurs resource)
         {
             return Resurser.TryAdd(resource.ResursId, resource);
-        }
-
-        public static bool SubscribeToWebhook(string id, WebhookSubscription subscription)
-        {
-            if (!WebhookSubscriptions.ContainsKey(id))
-                WebhookSubscriptions.Add(id, new ConcurrentDictionary<string, WebhookSubscription>());
-            
-            return WebhookSubscriptions[id].TryAdd(subscription.Uri, subscription);
-        }
-
-        public static bool UnsubscribeToWebhook(string id, string uri)
-        {
-            if (!WebhookSubscriptions.ContainsKey(id))
-                return false;
-            
-            return WebhookSubscriptions[id].TryRemove(uri, out var dummy);
-        }
-
-        public static void TriggerWebhook(string id, object payload)
-        {
-            if (!WebhookSubscriptions.ContainsKey(id))
-                return;
-
-            var data = JsonSerializer.Serialize(payload);
-
-            using (var client = new System.Net.WebClient())
-            {
-                foreach (var sub in WebhookSubscriptions[id].Values)
-                {
-                    var uri = sub.Uri;
-                    Task.Run(() => {
-                        try
-                        {
-                            client.UploadStringTaskAsync(uri, data);
-                        }
-                        catch
-                        {
-                        }
-                    });
-                }
-            }
         }
     }
 }

@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <!--<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\Johan\Dev\DataTorgetPoc\bokningsapi\bokningsapi.xml</DocumentationFile>
+    <DocumentationFile>C:\Johan\Dev\DataTorgetPoc\kommunikationsapi\kommunikationsapi.xml</DocumentationFile>
   </PropertyGroup>-->
 
   <ItemGroup>
