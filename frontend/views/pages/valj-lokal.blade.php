@@ -17,45 +17,48 @@
     @endtypography
 
     @collection(['sharp' => true, 'bordered' => true])
-      
-      @for($i = 1; $i <= 6; $i++)
 
-        @collection__item()
-          @slot('prefix')
-            <div class="c-collection__icon">
-              @icon(['icon' => 'room', 'size' => 'md'])
-              @endicon
-            </div>
-          @endslot
+      @if($locations) 
+        @foreach($locations as $location)
+          @collection__item()
+            @slot('prefix')
+              <div class="c-collection__icon">
+                @icon(['icon' => 'room', 'size' => 'md'])
+                @endicon
+              </div>
+            @endslot
 
-          @typography(['element' => 'h4'])
-            HbgWorks - StreetFighter
-          @endtypography
-          @typography([])
-            Antal stolar: 4
-          @endtypography
+            @typography(['element' => 'h4'])
+              {{ $location->namn }}
+            @endtypography
+            @typography([])
+              Antal stolar: {{ $location->egenskaper->capacity }} <span style="padding: 0 16px; display: inline-block; color: #999;"> | </span> Timpris: {{ $location->timpris }}:-
+            @endtypography
 
-          @slot('secondary')
-            @button(['href' => '/boka?id=' . $i])
-              Välj
-            @endbutton
-          @endslot
-        @endcollection__item
-
-      @endfor
+            @slot('secondary')
+              @button(['href' => '/boka?id=' . $location->resursId])
+                Välj
+              @endbutton
+            @endslot
+          @endcollection__item
+        @endforeach
+      @else
+        @notice([
+          'type' => 'info',
+          'message' => [
+              'text' => 'Det finns inga bokningsbara lokaler just nu.',
+              'size' => 'sm'
+          ],
+          'icon' => [
+              'name' => 'report',
+              'size' => 'md',
+              'color' => 'white'
+          ]
+        ])
+        @endnotice
+      @endif
 
     @endcollection
-
-    @pagination([
-      'list' => [
-          ['href' => $pageNow . '?pagination=1', 'label' => 'Page 1'],
-          ['href' => $pageNow . '?pagination=2', 'label' => 'Page 2'],
-          ['href' => $pageNow . '?pagination=3', 'label' => 'Page 3'],
-      ],
-      'current' => $pagination,
-      'classList' => ['u-margin__top--4', 'u-display--flex', 'u-justify-content--center']
-    ])
-    @endpagination
 
   @endpaper
 @endsection

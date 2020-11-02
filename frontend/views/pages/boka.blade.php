@@ -17,9 +17,7 @@
     @endtypography
 
     @collection(['sharp' => true, 'bordered' => true])
-      
-      @for($i = 1; $i <= 6; $i++)
-
+      @foreach($currentTimes as $time) 
         @collection__item()
           @slot('prefix')
             <div class="c-collection__icon">
@@ -32,26 +30,25 @@
             Måndag 15/5
           @endtypography
           @typography([])
-            10:00 - 15:00
+            {{ $time->startTid}} - {{ $time->slutTid}}
           @endtypography
 
           @slot('secondary')
-            @button(['href' => '/boka?id=' . $i . '&time=' . time()])
-              Boka
-            @endbutton
+
+            @if($time->tillganglig)
+              @button(['href' => '/boka?id=&time=' . time()])
+                Boka
+              @endbutton
+            @endif
           @endslot
         @endcollection__item
 
-      @endfor
+      @endforeach
 
     @endcollection
 
     @pagination([
-      'list' => [
-          ['href' => $pageNow . '?pagination=1', 'label' => 'Page 1'],
-          ['href' => $pageNow . '?pagination=2', 'label' => 'Page 2'],
-          ['href' => $pageNow . '?pagination=3', 'label' => 'Page 3'],
-      ],
+      'list' => $pages,
       'current' => $pagination,
       'classList' => ['u-margin__top--4', 'u-display--flex', 'u-justify-content--center']
     ])
