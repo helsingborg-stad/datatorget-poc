@@ -11,8 +11,7 @@ class View
 
     public function loadControllerData($view) {
 
-        $view = ucfirst(trim(str_replace(' ', '', ucwords(str_replace('-', ' ', $view))), "/"));
-
+        $view = ucfirst(trim(str_replace(' ', '', ucwords(str_replace(array("-","/"), ' ', $view))), "/"));
         if(file_exists(__DIR__ . "/Controller/" . $view . ".php")) {
             $class = "HbgStyleGuide\\Controller\\".$view; 
             $obj = new $class;

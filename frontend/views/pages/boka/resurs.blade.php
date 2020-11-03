@@ -36,7 +36,7 @@
             @endtypography
 
             @slot('secondary')
-              @button(['href' => '/boka?id=' . $location->resursId])
+              @button(['href' => '/boka/tid?id=' . $location->resursId])
                 Välj
               @endbutton
             @endslot
