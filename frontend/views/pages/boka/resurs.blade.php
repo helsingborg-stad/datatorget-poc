@@ -16,8 +16,11 @@
       Välj lokal
     @endtypography
 
-    @collection(['sharp' => true, 'bordered' => true])
+    @include('partials.progress',[
+      'percent' => 25
+    ])
 
+    @collection(['sharp' => true, 'bordered' => true])
       @if($locations) 
         @foreach($locations as $location)
           @collection__item()

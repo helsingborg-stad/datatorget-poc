@@ -1,0 +1,6 @@
+
+
+<div class="progress">
+<div class="bar" style="width: {{$percent}}%"></div>
+</div>
+  

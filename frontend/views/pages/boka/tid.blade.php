@@ -16,6 +16,10 @@
       Välj tid: {{ $roomName }}
     @endtypography
 
+    @include('partials.progress',[
+      'percent' => 50
+    ])
+
     @if($currentTimes)
 
       @collection(['sharp' => true, 'bordered' => true])
@@ -38,7 +42,7 @@
             @slot('secondary')
 
               @if($time->isAvailable)
-                @button(['href' => '/boka?id=' . $time->uid])
+                @button(['href' => '/boka/betala?id=' . $time->uid])
                   Boka
                 @endbutton
               @endif

@@ -20,6 +20,25 @@
         </style>
     </noscript>
 
+
+    <style type="text/css">
+        .progress {
+            height: 16px; 
+            width: 100%; 
+            background: #f9abca; 
+            overflow: hidden;
+            border-radius: 5px; 
+            margin-bottom: 32px;
+        }
+    
+        .progress div {
+            display: block;
+            width: 25%; 
+            height: inherit; 
+            background: #fa0b6b; 
+        }
+    </style>
+
 </head>
 <body class="no-js">
     
