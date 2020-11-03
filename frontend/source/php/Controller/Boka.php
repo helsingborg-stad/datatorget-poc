@@ -11,9 +11,18 @@ class Boka Extends BaseController {
   public function __construct() {
     parent::__construct(__CLASS__);
 
+    if(!isset($_GET['id'])) {
+      new Redirect('/', ['action' => '404']); 
+    }
+
     $cpage = isset($_GET['pagination']) ? $_GET['pagination'] : 1; 
     
     $this->data['times'] = $this->getTimes(); 
+    $this->data['roomName'] = $this->getRoomName(); 
+
+    if(!$this->data['roomName']) {
+      new Redirect('/', ['action' => '404']); 
+    }
 
     //Check response
     if($this->data['times']) {
@@ -24,6 +33,20 @@ class Boka Extends BaseController {
       $this->data['pages'] = false;
     }
     
+  }
+
+  public function getRoomName() {
+    
+    $curl = new Curl('GET', MS_BOOKING . '/api/v1/resurs/hamta', [
+      'resursId' => $_GET['id']
+    ]);
+
+    if($curl->isValid == true) {
+      return $curl->response->namn;
+    } 
+
+    return false; 
+
   }
 
   public function getTimes() {

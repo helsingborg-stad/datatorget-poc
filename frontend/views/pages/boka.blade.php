@@ -13,7 +13,7 @@
         'u-margin__bottom--2'
       ]
     ])
-      Boka: HbgWorks - StreetFighter
+      Välj tid: {{ $roomName }}
     @endtypography
 
     @if($currentTimes)
@@ -38,7 +38,7 @@
             @slot('secondary')
 
               @if($time->isAvailable)
-                @button(['href' => '/boka?id=&time=' . time()])
+                @button(['href' => '/boka?id=' . $time->uid])
                   Boka
                 @endbutton
               @endif
@@ -71,7 +71,7 @@
         ]
       ])
       @endnotice
-      
+
     @endif
 
   @endpaper
