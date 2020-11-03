@@ -23,7 +23,6 @@
     <div class="u-margin__bottom--4">
 
       @button([
-        'color' => 'primary',
         'text' => 'Kortbetalning',
         'size' => 'md',
         'type' => 'basic',

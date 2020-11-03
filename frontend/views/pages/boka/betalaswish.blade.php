@@ -32,12 +32,14 @@
       @endbutton
 
       @button([
-        'color' => 'primary',
         'text' => 'Swish',
         'size' => 'md',
         'type' => 'basic',
         'href' => '/boka/betalaswish?id=' . $_GET['id'],
-        'attributeList' => ['disabled' => 'disabled']
+        'attributeList' => [
+          'disabled' => 'disabled',
+
+        ]
       ])
       @endbutton
 
