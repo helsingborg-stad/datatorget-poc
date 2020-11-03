@@ -70,7 +70,6 @@ class Curl
             $arguments[CURLOPT_HTTPHEADER] = $headers;
         }
 
-
         /**
          * Do the actual curl
          */
@@ -90,9 +89,13 @@ class Curl
         }
 
         if(is_object($response) && !empty($response)) {
-          $this->isValid = true;
+            if(isset($response->errors) && $response->status != 200) {
+                $this->isValid = false;
+            } else {
+                $this->isValid = true;
+            }
         } else {
-          $this->isValid = false;
+            $this->isValid = false;
         }
 
         /**
