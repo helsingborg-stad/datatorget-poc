@@ -29,7 +29,7 @@
             @endslot
 
             @typography(['element' => 'h4'])
-            {{ $time->day }}
+              {{ $time->day }}
             @endtypography
             @typography([])
               {{ $time->startTime}} - {{ $time->endTime}}
