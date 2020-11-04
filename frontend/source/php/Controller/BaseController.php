@@ -74,7 +74,7 @@ abstract class BaseController {
    */
   public function initActionListener() {
     if(isset($_GET['action'])) {
-      return $this->action = $_GET['action'];
+      return $this->action = str_replace(' ', '', ucwords(str_replace('-', " ", $_GET['action'])));
     }
     return $this->action = false; 
   }

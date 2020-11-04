@@ -74,6 +74,7 @@ class BokaTid Extends BaseController {
         $item->endTime = date("H:i", strtotime($item->slutTid)); 
         $item->isAvailable = (bool) $item->tillganglig; 
         $item->bookingNumber = (int) $item->bokningsnr; 
+        $item->passTrough = base64_encode(json_encode($item)); 
 
         //Remove untranslated
         unset($item->startTid);
@@ -95,5 +96,47 @@ class BokaTid Extends BaseController {
       $stack[] = ['href' => '?pagination='. ($i) .'&id=' . $_GET['id'], 'label' => 'Page ' . $i]; 
     }
     return $stack; 
+  }
+
+
+  public function actionMakeBooking($req) {
+
+    //Verify signature
+    if(isset($req['id']) && base64_decode($req['id'], true)) {
+      $req['id'] = base64_decode($req['id']);
+    } else {
+      new Redirect('/boka/tid', ['action' => 'payment-error-id']); 
+    }
+
+    //Verify data
+    if(isset($req['data']) && base64_decode($req['data'], true)) {
+      $req['data'] = json_decode(base64_decode($req['data']));
+    } else {
+      new Redirect('/boka/tid', ['action' => 'payment-error-data']); 
+    }
+
+    //Get data about payment
+    $bookingData = $req['data']; 
+
+    //Get user data
+    $user = new User();
+
+    //Make req
+    $curl = new Curl('GET', MS_BOOKING . '/api/v1/bokning/skapa', [
+      'resursid' => $bookingData->resursId,
+      'startTid' => $bookingData->startTid,
+      'slutTid' => $bookingData->slutTid,
+      'kundnr' => $user->kundnr
+    ]); 
+
+    //Check if is valid response
+    if($curl->isValid) {
+      new Redirect('/boka/betala', [
+        'id'    => $req['id'],
+        'data'  => $req['data']
+      ]); 
+    } else {
+      new Redirect('/boka/tid', ['action' => 'payment-order-error']); 
+    } 
   }
 }

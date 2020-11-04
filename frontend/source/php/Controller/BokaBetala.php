@@ -17,13 +17,15 @@ class BokaBetala Extends BaseController {
       new Redirect('/', ['action' => 'not-authenticated']); 
     }
 
-    if(!isset($_GET['id'])) {
+    if(!isset($_GET['id'])||!isset($_GET['data'])) {
       new Redirect('/', ['action' => '404']); 
     }
 
-    $user = new User();
+    $this->data['resourceTimeId'] = base64_encode($_GET['id']);
 
+    //Feed userdata to fill in card fields
+    $user = new User();
     $this->data['user'] = $user->get(); 
-    
+
   }
 }

@@ -16,6 +16,8 @@ class MittKonto Extends BaseController {
     if(!$user->isAuthenticated()) {
       new Redirect('/', ['action' => 'not-authenticated']); 
     }
+
+    $this->data['bookings'] = $this->getMyBookings($user->get()->kundnr); 
   }
 
   /**
@@ -40,6 +42,8 @@ class MittKonto Extends BaseController {
       new Redirect('/mitt-konto', ['action' => 'registration-error-email']); 
     }
 
+    $user = new User(); 
+
     //Make req
     $curl = new Curl('GET', MS_USER . '/api/v1/kund/uppdatera', [
       'kundnr' => $user->get()->kundnr,
@@ -53,5 +57,19 @@ class MittKonto Extends BaseController {
     } else {
       new Redirect('/mitt-konto', ['action' => 'update-error']); 
     }
+  }
+
+  public function getMyBookings($knr) {
+
+    //Make req
+    $curl = new Curl('GET', MS_BOOKING . '/api/v1/bokning/lista', [
+      //'kundnr' => $knr
+    ]);
+    
+    if($curl->isValid) {
+      return $curl->response; 
+    }
+
+    return false; 
   }
 }
