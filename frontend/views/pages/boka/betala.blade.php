@@ -22,23 +22,25 @@
 
     <div class="u-margin__bottom--4">
 
-      @button([
-        'text' => 'Kortbetalning',
-        'size' => 'md',
-        'type' => 'basic',
-        'href' => '/boka/betala?id=' . $_GET['id'],
-        'attributeList' => ['disabled' => 'disabled']
-      ])
-      @endbutton
+      <div class="s-group">
+        @button([
+          'color' => 'primary',
+          'text' => 'Kortbetalning',
+          'size' => 'md',
+          'type' => 'basic',
+          'href' => '/boka/betala?id=' . $_GET['id'],
+          'attributeList' => ['disabled' => 'disabled']
+        ])
+        @endbutton
 
-      @button([
-        'color' => 'primary',
-        'text' => 'Swish',
-        'size' => 'md',
-        'type' => 'basic',
-        'href' => '/boka/betalaswish?id=' . $_GET['id'],
-      ])
-      @endbutton
+        @button([
+          'text' => 'Swish',
+          'size' => 'md',
+          'type' => 'basic',
+          'href' => '/boka/betalaswish?id=' . $_GET['id'],
+        ])
+        @endbutton
+      </div>
 
     </div>
 

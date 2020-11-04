@@ -37,6 +37,23 @@
             height: inherit; 
             background: #fa0b6b; 
         }
+
+        .s-group {
+            display: flex;
+        }
+
+        .s-group > *:not(:first-child) {
+            margin-left: 0;
+            border-top-left-radius: 0; 
+            border-bottom-left-radius: 0; 
+        }
+
+        .s-group > *:not(:last-child) {
+            margin-right: 0;
+            border-top-right-radius: 0; 
+            border-bottom-right-radius: 0; 
+        }
+
     </style>
 
 </head>
