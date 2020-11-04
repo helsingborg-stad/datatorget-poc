@@ -42,6 +42,10 @@
             display: flex;
         }
 
+        .s-group > * {
+            flex: 1;
+        }
+
         .s-group > *:not(:first-child) {
             margin-left: 0;
             border-top-left-radius: 0; 

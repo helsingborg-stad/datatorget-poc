@@ -73,8 +73,7 @@
       ])
       @endfield
 
-      <div class="o-grid u-margin--0">
-        <div class="o-grid-auto u-padding--0 u-margin--0">
+        <div class="s-group">
           @field([
             'type' => 'text',
             'value' => date("m"),
@@ -83,11 +82,9 @@
                 'name' => 'expirymonth',
             ],
             'label' => "Giltigt till (månad)",
-            'classList' => ['u-margin__right--1']
+            'classList' => []
           ])
           @endfield
-        </div>
-        <div class="o-grid-auto u-padding--0 u-margin--0">
           @field([
             'type' => 'text',
             'value' => date("y"),
@@ -99,7 +96,6 @@
           ])
           @endfield
         </div>
-      </div>
 
       @field([
           'type' => 'text',
