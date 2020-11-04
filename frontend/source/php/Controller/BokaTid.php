@@ -11,6 +11,12 @@ class BokaTid Extends BaseController {
   public function __construct() {
     parent::__construct(__CLASS__);
 
+    //Prevent uninlogged users 
+    $user = new User();
+    if(!$user->isAuthenticated()) {
+      new Redirect('/', ['action' => 'not-authenticated']); 
+    }
+
     if(!isset($_GET['id'])) {
       new Redirect('/', ['action' => '404']); 
     }

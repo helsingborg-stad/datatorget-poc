@@ -10,6 +10,12 @@ class BokaResurs Extends BaseController {
   
   public function __construct() {
     parent::__construct(__CLASS__);
+
+    //Prevent uninlogged users 
+    $user = new User();
+    if(!$user->isAuthenticated()) {
+      new Redirect('/', ['action' => 'not-authenticated']); 
+    }
     
     $this->data['locations'] = $this->getLocations(); 
   }

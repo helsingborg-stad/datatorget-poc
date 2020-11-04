@@ -31,7 +31,7 @@ class Curl
                     CURLOPT_SSL_VERIFYPEER      => false,
                     CURLOPT_SSL_VERIFYHOST      => false,
                     CURLOPT_URL                 => $url,
-                    CURLOPT_CONNECTTIMEOUT_MS  => 12000,
+                    CURLOPT_CONNECTTIMEOUT_MS   => 2000,
                 );
 
                 break;

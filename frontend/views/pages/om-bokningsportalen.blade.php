@@ -18,8 +18,21 @@
         @endtypography
 
         @typography()
-            Bokningsportalen är en del av projektet datatorget. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec sed odio dui. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+            Bokningsportalen är en del av projektet datatorget. 
         @endtypography
+
+        @typography(['element' => 'h2'])
+            Datakällor
+        @endtypography
+
+        @typography()
+            Nedan finner du dokumentation till de datakällor som används för att driva portalen.
+        @endtypography
+
+        @foreach ($apis as $item) 
+            @button($item)
+            @endbutton
+        @endforeach
 
     @endpaper
 

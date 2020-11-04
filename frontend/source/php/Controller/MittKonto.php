@@ -11,7 +11,11 @@ class MittKonto Extends BaseController {
   public function __construct() {
     parent::__construct(__CLASS__);
 
-    
+    //Check for login
+    $user = new User();
+    if(!$user->isAuthenticated()) {
+      new Redirect('/', ['action' => 'not-authenticated']); 
+    }
   }
 
   /**
@@ -27,12 +31,6 @@ class MittKonto Extends BaseController {
       'name' => false,
       'email' => false
     ], $req);
-
-    //Check for login
-    $user = new User();
-    if(!$user->isAuthenticated()) {
-      new Redirect('/mitt-konto', ['action' => 'not-authenticated']); 
-    }
 
     //Validate inputs
     if(!$this->validate::empty($req->name)) {
