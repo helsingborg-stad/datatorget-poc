@@ -72,7 +72,7 @@ class BokaTid Extends BaseController {
         $item->day = date("j F Y", strtotime($item->startTid)); 
         $item->startTime = date("H:i", strtotime($item->startTid)); 
         $item->endTime = date("H:i", strtotime($item->slutTid)); 
-        $item->isAvailable = (bool) $item->tillganglig; 
+        $item->isCanceled = (bool) $item->avbokad; 
         $item->bookingNumber = (int) $item->bokningsnr; 
         $item->passTrough = base64_encode(json_encode($item)); 
 
@@ -98,7 +98,6 @@ class BokaTid Extends BaseController {
     return $stack; 
   }
 
-
   public function actionMakeBooking($req) {
 
     //Verify signature
@@ -110,13 +109,10 @@ class BokaTid Extends BaseController {
 
     //Verify data
     if(isset($req['data']) && base64_decode($req['data'], true)) {
-      $req['data'] = json_decode(base64_decode($req['data']));
+      $bookingData = $this->decodeData($req['data']); 
     } else {
       new Redirect('/boka/tid', ['action' => 'payment-error-data']); 
     }
-
-    //Get data about payment
-    $bookingData = $req['data']; 
 
     //Get user data
     $user = new User();

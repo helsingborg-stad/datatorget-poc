@@ -67,7 +67,39 @@ class MittKonto Extends BaseController {
     ]);
     
     if($curl->isValid) {
+      //Check if valid
+      foreach($curl->response as &$item) {
+
+
+        $resource = new Curl('GET', MS_BOOKING . '/api/v1/resurs/hamta', [
+          'resursId' => $item->resurstider[0]->resursId
+        ]);
+
+        if($resource->isValid) {
+            $resourceName = $resource->response->namn; 
+        } else {
+          $resourceName = "Okänd resurs"; 
+        }
+
+        //Translate data
+        $item->uid = base64_encode($item->bokningsnr); 
+        $item->day = date("j F Y", strtotime($item->startTid)); 
+        $item->startTime = date("H:i", strtotime($item->startTid)); 
+        $item->endTime = date("H:i", strtotime($item->slutTid)); 
+        $item->isPaid = (bool) $item->betald; 
+        $item->isCanceled = (bool) $item->avbokad; 
+        $item->passTrough = base64_encode(json_encode($item)); 
+        $item->resourceName = $resourceName; 
+
+        //Remove untranslated
+        unset($item->startTid);
+        unset($item->slutTid);
+        unset($item->bokningsnr);
+        unset($item->tillganglig);
+      }
+
       return $curl->response; 
+
     }
 
     return false; 

@@ -99,19 +99,28 @@
             @endslot
 
             @typography(['element' => 'h4'])
-              {{ $booking->bokningsnr }}
+                {{ $booking->resourceName }}
             @endtypography
             @typography([])
-              
+                {{ $booking->day }} klockan {{ $booking->startTime }} - {{ $booking->endTime }}
             @endtypography
 
             @slot('secondary')
-              @button(['href' => '/boka/tid?id='])
-                Avboka
-              @endbutton
-              @button(['href' => '/boka/tid?id=', 'classList' => ['u-margin__left--2']])
-                Betala
-              @endbutton
+
+                @if(!$booking->isCanceled)
+                    
+                    @button(['href' => '/boka/tid?id='])
+                        Avboka
+                    @endbutton
+
+                    @if(!$booking->betald)
+                        @button(['href' => '/boka/tid?id=', 'classList' => ['u-margin__left--2']])
+                            Betala
+                        @endbutton
+                    @endif
+
+                @endif
+
             @endslot
           @endcollection__item
         @endforeach
@@ -134,10 +143,4 @@
     @endcollection
 
   @endpaper
-
-
-
-
-
-    <?php var_dump($bookings); ?>
 @stop

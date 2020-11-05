@@ -78,4 +78,12 @@ abstract class BaseController {
     }
     return $this->action = false; 
   }
+
+  public function encodeData($data) {
+    return base64_encode(json_encode($data)); 
+  }
+
+  public function decodeData($data) {
+    return json_decode(base64_decode($data)); 
+  }
 }

@@ -21,11 +21,9 @@ class BokaBetala Extends BaseController {
       new Redirect('/', ['action' => '404']); 
     }
 
+    //Get data
     $this->data['resourceTimeId'] = base64_encode($_GET['id']);
-
-    //Feed userdata to fill in card fields
-    $user = new User();
-    $this->data['user'] = $user->get(); 
+    $this->data['bookingData'] = $this->decodeData($_GET['data']); 
 
   }
 }

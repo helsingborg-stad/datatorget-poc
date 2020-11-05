@@ -36,7 +36,7 @@
               {{ $time->day }}
             @endtypography
             @typography([])
-              {{ $time->startTime}} - {{ $time->endTime}}
+              {{ $time->startTime}} - {{ $time->endTime }}
             @endtypography
 
             @slot('secondary')

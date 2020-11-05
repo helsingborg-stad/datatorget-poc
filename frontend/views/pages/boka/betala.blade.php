@@ -44,7 +44,6 @@
 
     </div>
 
-
     @form([
       'id' => 'card-payment',
       'method' => 'POST',
