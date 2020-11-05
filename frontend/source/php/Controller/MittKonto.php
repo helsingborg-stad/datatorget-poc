@@ -70,7 +70,6 @@ class MittKonto Extends BaseController {
       //Check if valid
       foreach($curl->response as &$item) {
 
-
         $resource = new Curl('GET', MS_BOOKING . '/api/v1/resurs/hamta', [
           'resursId' => $item->resurstider[0]->resursId
         ]);
@@ -98,7 +97,9 @@ class MittKonto Extends BaseController {
         unset($item->tillganglig);
       }
 
-      return $curl->response; 
+      array_reverse((array) $curl->response); 
+
+      return (object) $curl->response; 
 
     }
 

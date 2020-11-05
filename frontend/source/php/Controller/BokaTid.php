@@ -68,13 +68,13 @@ class BokaTid Extends BaseController {
       foreach($curl->response as &$item) {
 
         //Translate data
-        $item->uid = base64_encode($item->resurstidId); 
-        $item->day = date("j F Y", strtotime($item->startTid)); 
-        $item->startTime = date("H:i", strtotime($item->startTid)); 
-        $item->endTime = date("H:i", strtotime($item->slutTid)); 
-        $item->isCanceled = (bool) $item->avbokad; 
-        $item->bookingNumber = (int) $item->bokningsnr; 
-        $item->passTrough = base64_encode(json_encode($item)); 
+        $item->uid = base64_encode($item->resurstidId);
+        $item->day = date("j F Y", strtotime($item->startTid));
+        $item->startTime = date("H:i", strtotime($item->startTid));
+        $item->endTime = date("H:i", strtotime($item->slutTid));
+        $item->isAvailable = (bool) $item->tillganglig;
+        $item->bookingNumber = (int) $item->bokningsnr;
+        $item->passTrough = base64_encode(json_encode($item));
 
         //Remove untranslated
         unset($item->startTid);
