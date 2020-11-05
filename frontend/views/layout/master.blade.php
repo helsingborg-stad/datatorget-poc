@@ -24,6 +24,24 @@
 
 
     <style type="text/css">
+
+        .c-collection__item {
+            position: relative;
+        }
+
+        .is-canceled {
+            opacity: .5;
+        }
+
+        .is-canceled:after {
+            content: "AVBOKAD"; 
+            position: absolute;
+            bottom: 8px; 
+            right: 8px;
+            font-size: .9em; 
+            color: #ff0000;
+        }
+
         .progress {
             height: 16px; 
             width: 100%; 

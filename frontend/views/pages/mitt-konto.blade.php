@@ -90,7 +90,9 @@
     @collection(['sharp' => true, 'bordered' => true])
       @if($bookings) 
         @foreach($bookings as $booking)
-          @collection__item()
+          @collection__item(['classList' => [
+            ($booking->isCanceled ? 'is-canceled' : '')
+          ]])
             @slot('prefix')
               <div class="c-collection__icon">
                 @icon(['icon' => 'room', 'size' => 'md'])
