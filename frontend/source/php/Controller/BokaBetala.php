@@ -17,13 +17,47 @@ class BokaBetala Extends BaseController {
       new Redirect('/', ['action' => 'not-authenticated']); 
     }
 
-    if(!isset($_GET['id'])||!isset($_GET['data'])) {
+    if(!isset($_GET['id'])) {
       new Redirect('/', ['action' => '404']); 
     }
 
     //Get data
     $this->data['resourceTimeId'] = base64_encode($_GET['id']);
-    $this->data['bookingData'] = $this->decodeData($_GET['data']); 
+  }
 
+  /**
+   * Card payment action
+   *
+   * @param array $req
+   * @return void
+   */
+  public function actionCardPayment(array $req) {
+    $payment = $this->makePayment('swish', $req); 
+
+    if($payment) {
+      new Redirect('/boka/klar', ['action' => 'payment-success', 'method' => 'card']); 
+    }
+
+    new Redirect('/boka/betala', ['action' => 'payment-error', 'id' => $req['id']]);
+  }
+
+  /**
+   * Swish payment action
+   *
+   * @param array $req
+   * @return void
+   */
+  public function actionSwishPayment(array $req) {
+    $payment = $this->makePayment('swish', $req); 
+
+    if($payment) {
+      new Redirect('/boka/klar', ['action' => 'payment-success', 'method' => 'swish']); 
+    }
+
+    new Redirect('/boka/betalaswish', ['action' => 'payment-error', 'id' => $req['id']]);
+  }
+
+  private function makePayment($method, $req) {
+    return true; 
   }
 }

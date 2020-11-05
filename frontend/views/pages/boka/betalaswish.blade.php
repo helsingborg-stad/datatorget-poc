@@ -50,7 +50,7 @@
     @form([
       'id' => 'swish-payment',
       'method' => 'POST',
-      'action' => '/boka/klar?action=swishPayment&id=' . $_GET['id'] . "&data=" . $_GET['data']
+      'action' => '/boka/betala?action=swishPayment&id=' . $_GET['id']
     ])
       @field([
           'type' => 'text',

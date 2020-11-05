@@ -47,7 +47,7 @@
     @form([
       'id' => 'card-payment',
       'method' => 'POST',
-      'action' => '/boka/klar?action=cardPayment&id=' . $_GET['id'] . "&data=" . $_GET['data']
+      'action' => '/boka/betala?action=cardPayment&id=' . $_GET['id']
     ])
 
       @field([
