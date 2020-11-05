@@ -17,14 +17,22 @@ class BokaAvboka Extends BaseController {
   }
 
   /**
-   * Card payment action
+   * Unbook
    *
    * @param array $req
    * @return void
    */
   public function actionUnbook(array $req) {
-    
+  
+    $curl = new Curl('GET', MS_BOOKING . '/api/v1/bokning/avboka', [
+      'bokningsnr' => $this->decodeData($_GET['id'])
+    ]);
 
-    new Redirect('/mitt-konto', ['action' => 'unbooking-success']); 
+    if($curl->isValid == true) {
+      new Redirect('/mitt-konto', ['action' => 'unbooking-success']); 
+    } 
+
+    new Redirect('/mitt-konto', ['action' => 'unbooking-error']); 
+    
   }
 }
