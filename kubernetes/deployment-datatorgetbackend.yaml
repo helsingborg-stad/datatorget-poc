@@ -92,6 +92,11 @@ spec:
             secretKeyRef:
               name: secrets-datatorgetbackend
               key: SMTP_PASSWORD
+        - name: SENDGRID_APIKEY
+          valueFrom:
+            secretKeyRef:
+              name: secrets-datatorgetbackend
+              key: SENDGRID_APIKEY
 
       - name: betalningsapi
         image: datatorgetpoc/betalningsapi

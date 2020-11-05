@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Net.Mail;
+using MinimalSendGrid;
 
 namespace kommunikationsapi.code
 {
     public static class MailServer
     {
-        public static void Send(EpostMeddelande meddelande)
+        public static void SendBySmtp(EpostMeddelande meddelande)
         {
             var client = new SmtpClient
             {
@@ -33,6 +34,19 @@ namespace kommunikationsapi.code
             msg.To.Add(meddelande.MottagareEpost);
 
             client.Send(msg);
+        }
+
+        public static async void SendBySendGrid(EpostMeddelande meddelande)
+        {
+            var msg = new MessageBuilder()
+                .SetFrom(meddelande.AvsandareEpost)
+                .AddTo(meddelande.MottagareEpost)
+                .SetSubject(meddelande.Amne)
+                .AddBody(meddelande.Meddelandetext)
+                .Build();
+
+            var sender = new HttpV3MessageSender(_Config.SendGridApiKey);
+            var result = await sender.Send(msg);
         }
     }
 }

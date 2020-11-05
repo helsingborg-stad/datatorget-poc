@@ -27,7 +27,8 @@ namespace kommunikationsapi.controllers
                 Meddelandetext = meddelandetext
             };
 
-            MailServer.Send(meddelande);
+            //MailServer.SendBySmtp(meddelande);
+            MailServer.SendBySendGrid(meddelande);
         }
 
         [HttpPost]
