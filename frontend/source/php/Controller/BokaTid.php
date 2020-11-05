@@ -122,8 +122,12 @@ class BokaTid Extends BaseController {
       'resursid' => $bookingData->resursId,
       'startTid' => $bookingData->startTid,
       'slutTid' => $bookingData->slutTid,
-      'kundnr' => $user->kundnr
+      'kundnr' => $user->get()->kundnr
     ]); 
+
+
+      var_dump($curl); 
+      die; 
 
     //Check if is valid response
     if($curl->isValid) {

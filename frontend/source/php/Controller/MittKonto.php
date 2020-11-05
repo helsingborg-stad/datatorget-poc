@@ -81,14 +81,14 @@ class MittKonto Extends BaseController {
         }
 
         //Translate data
-        $item->uid = base64_encode($item->bokningsnr); 
+        $item->uid = $this->encodeData($item->bokningsnr); 
         $item->day = date("j F Y", strtotime($item->startTid)); 
         $item->startTime = date("H:i", strtotime($item->startTid)); 
         $item->endTime = date("H:i", strtotime($item->slutTid)); 
         $item->isPaid = (bool) $item->betald; 
         $item->isCanceled = (bool) $item->avbokad; 
-        $item->passTrough = base64_encode(json_encode($item)); 
         $item->resourceName = $resourceName; 
+        $item->passTrough = base64_encode(json_encode($item)); 
 
         //Remove untranslated
         unset($item->startTid);

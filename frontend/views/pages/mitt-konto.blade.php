@@ -109,12 +109,12 @@
 
                 @if(!$booking->isCanceled)
                     
-                    @button(['href' => '/boka/tid?id='])
+                    @button(['href' => '/boka/avboka?id='.$booking->uid])
                         Avboka
                     @endbutton
 
                     @if(!$booking->betald)
-                        @button(['href' => '/boka/tid?id=', 'classList' => ['u-margin__left--2']])
+                        @button(['href' => '/boka/tid?id=' . $booking->uid, 'classList' => ['u-margin__left--2']])
                             Betala
                         @endbutton
                     @endif
