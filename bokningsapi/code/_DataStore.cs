@@ -56,6 +56,7 @@ namespace bokningsapi.code
                 Bokningar.TryAdd(bokning.Bokningsnr, bokning);
             }
 
+            _MessageService.Send(_Config.MessageServiceExchange, "", bokning);
             return true;
         }
 
@@ -78,6 +79,7 @@ namespace bokningsapi.code
             bokning.SlutTid = slutTid;
             bokning.SenastUppdaterad = DateTime.Now;
 
+            _MessageService.Send(_Config.MessageServiceExchange, "", bokning);
             return true;
         }
 
@@ -88,6 +90,8 @@ namespace bokningsapi.code
 
             bokning.Avbokad = true;
             bokning.SenastUppdaterad = DateTime.Now;
+
+            _MessageService.Send(_Config.MessageServiceExchange, "", bokning);
         }
 
         public static bool TryAddResurs(Resurs resource)

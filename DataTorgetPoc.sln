@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "bokningsapi", "bokningsapi\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "kundapi", "kundapi\kundapi.csproj", "{1159B659-A8F4-435C-9A45-C6343BAFA180}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kommunikationsapi", "kommunikationsapi\kommunikationsapi.csproj", "{5A9EFDE9-94D5-4702-B305-F0117B51D94D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "kommunikationsapi", "kommunikationsapi\kommunikationsapi.csproj", "{5A9EFDE9-94D5-4702-B305-F0117B51D94D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "betalningsapi", "betalningsapi\betalningsapi.csproj", "{9DBEF31A-A408-4C2D-8D96-937990AAF619}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "betalningsapi", "betalningsapi\betalningsapi.csproj", "{9DBEF31A-A408-4C2D-8D96-937990AAF619}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kopplingstjanst", "kopplingstjanst\kopplingstjanst.csproj", "{9CC1619D-4CF4-4A39-85AB-1108BA8CEC33}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +71,18 @@ Global
 		{9DBEF31A-A408-4C2D-8D96-937990AAF619}.Release|x64.Build.0 = Release|Any CPU
 		{9DBEF31A-A408-4C2D-8D96-937990AAF619}.Release|x86.ActiveCfg = Release|Any CPU
 		{9DBEF31A-A408-4C2D-8D96-937990AAF619}.Release|x86.Build.0 = Release|Any CPU
+		{9CC1619D-4CF4-4A39-85AB-1108BA8CEC33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CC1619D-4CF4-4A39-85AB-1108BA8CEC33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CC1619D-4CF4-4A39-85AB-1108BA8CEC33}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9CC1619D-4CF4-4A39-85AB-1108BA8CEC33}.Debug|x64.Build.0 = Debug|Any CPU
+		{9CC1619D-4CF4-4A39-85AB-1108BA8CEC33}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9CC1619D-4CF4-4A39-85AB-1108BA8CEC33}.Debug|x86.Build.0 = Debug|Any CPU
+		{9CC1619D-4CF4-4A39-85AB-1108BA8CEC33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CC1619D-4CF4-4A39-85AB-1108BA8CEC33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CC1619D-4CF4-4A39-85AB-1108BA8CEC33}.Release|x64.ActiveCfg = Release|Any CPU
+		{9CC1619D-4CF4-4A39-85AB-1108BA8CEC33}.Release|x64.Build.0 = Release|Any CPU
+		{9CC1619D-4CF4-4A39-85AB-1108BA8CEC33}.Release|x86.ActiveCfg = Release|Any CPU
+		{9CC1619D-4CF4-4A39-85AB-1108BA8CEC33}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

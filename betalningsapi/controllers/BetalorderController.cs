@@ -41,13 +41,7 @@ namespace betalningsapi.controllers
             var order = _DataStore.SokId(betalorderid);
             order.BeloppBetalt += belopp;
 
-            if (!string.IsNullOrEmpty(_Config.BokningApi))
-            {
-                using (var client = new WebClient())
-                {
-                    client.DownloadString($"{_Config.BokningApi}/bokning/betala?bokningsnr={order.Referens}&belopp={belopp}");
-                }
-            }
+            _MessageService.Send(_Config.MessageServiceExchange, "", order);
 
             return order;
         }

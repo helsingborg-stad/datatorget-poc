@@ -49,13 +49,6 @@ namespace bokningsapi.controllers
             var bokning = new Bokning(resursid, startTid, slutTid, kundnr);
             if (_DataStore.TryAddBokning(bokning))
             {
-                if (!string.IsNullOrEmpty(_Config.BetalningsApi))
-                {
-                    using (var client = new WebClient())
-                    {
-                        client.DownloadString($"{_Config.BetalningsApi}/betalorder/skapa?applikation=bokning&referens={bokning.Bokningsnr}&beskrivning=bokning&belopp={bokning.Pris}&kundnr={bokning.Kundnr}");
-                    }
-                }
                 return bokning;
             }
             else
@@ -76,12 +69,12 @@ namespace bokningsapi.controllers
         }
 
         [HttpGet]
-        [Route("betala")]
-        public Bokning Betala(int bokningsnr, int belopp)
+        [Route("uppdateraBeloppBetalt")]
+        public Bokning UppdateraBeloppBetalt(int bokningsnr, int belopp)
         {
             if (_DataStore.TryGetBokning(bokningsnr, out var bokning))
             {
-                bokning.BeloppBetalt += belopp;
+                bokning.BeloppBetalt = belopp;
                 if (bokning.BeloppBetalt >= bokning.Pris)
                     bokning.Betald = true;
                 else

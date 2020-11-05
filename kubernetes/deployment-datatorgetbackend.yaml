@@ -22,8 +22,25 @@ spec:
         ports:
         - containerPort: 30001
         env:
-        - name: BETALNINGSAPI
-          value: http://localhost:30004/api/v1
+        - name: MESSAGE_SERVICE_HOST
+          value: localhost
+        - name: MESSAGE_SERVICE_PORT
+          value: "5672"
+        - name: MESSAGE_SERVICE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: secrets-datatorgetbackend
+              key: MESSAGE_SERVICE_USERNAME
+        - name: MESSAGE_SERVICE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: secrets-datatorgetbackend
+              key: MESSAGE_SERVICE_PASSWORD
+        - name: MESSAGE_SERVICE_EXCHANGE
+          value: "bokning"
+        - name: MESSAGE_SERVICE_ENABLED
+          value: "True"
+
       - name: kundapi
         image: datatorgetpoc/kundapi
         resources:
@@ -38,11 +55,20 @@ spec:
         - name: MESSAGE_SERVICE_PORT
           value: "5672"
         - name: MESSAGE_SERVICE_USERNAME
-          value: "datatorget"
+          valueFrom:
+            secretKeyRef:
+              name: secrets-datatorgetbackend
+              key: MESSAGE_SERVICE_USERNAME
         - name: MESSAGE_SERVICE_PASSWORD
-          value: "datatorget"
+          valueFrom:
+            secretKeyRef:
+              name: secrets-datatorgetbackend
+              key: MESSAGE_SERVICE_PASSWORD
+        - name: MESSAGE_SERVICE_EXCHANGE
+          value: "kund"
         - name: MESSAGE_SERVICE_ENABLED
           value: "True"
+          
       - name: kommunikationsapi
         image: datatorgetpoc/kommunikationsapi
         resources:
@@ -66,6 +92,7 @@ spec:
             secretKeyRef:
               name: secrets-datatorgetbackend
               key: SMTP_PASSWORD
+
       - name: betalningsapi
         image: datatorgetpoc/betalningsapi
         resources:
@@ -75,8 +102,51 @@ spec:
         ports:
         - containerPort: 30004
         env:
+        - name: MESSAGE_SERVICE_HOST
+          value: localhost
+        - name: MESSAGE_SERVICE_PORT
+          value: "5672"
+        - name: MESSAGE_SERVICE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: secrets-datatorgetbackend
+              key: MESSAGE_SERVICE_USERNAME
+        - name: MESSAGE_SERVICE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: secrets-datatorgetbackend
+              key: MESSAGE_SERVICE_PASSWORD
+        - name: MESSAGE_SERVICE_EXCHANGE
+          value: "betalning"
+        - name: MESSAGE_SERVICE_ENABLED
+          value: "True"
+
+      - name: kopplingstjanst
+        image: datatorgetpoc/kopplingstjanst
+        resources:
+          limits:
+            memory: "64Mi"
+            cpu: "100m"
+        env:
+        - name: MESSAGE_SERVICE_HOST
+          value: localhost
+        - name: MESSAGE_SERVICE_PORT
+          value: "5672"
+        - name: MESSAGE_SERVICE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: secrets-datatorgetbackend
+              key: MESSAGE_SERVICE_USERNAME
+        - name: MESSAGE_SERVICE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: secrets-datatorgetbackend
+              key: MESSAGE_SERVICE_PASSWORD
+        - name: BETALNINGSAPI
+          value: "http://localhost:30004/api/v1"
         - name: BOKNINGSAPI
-          value: http://localhost:30001/api/v1
+          value: "http://localhost:30001/api/v1"
+
       - name: rabbitmq
         image: rabbitmq:management
         resources:
@@ -101,13 +171,20 @@ spec:
               fieldRef:
                 fieldPath: metadata.namespace
           - name: RABBITMQ_DEFAULT_USER
-            value: datatorget
+            valueFrom:
+              secretKeyRef:
+                name: secrets-datatorgetbackend
+                key: MESSAGE_SERVICE_USERNAME
           - name: RABBITMQ_DEFAULT_PASS
-            value: datatorget
+            valueFrom:
+              secretKeyRef:
+                name: secrets-datatorgetbackend
+                key: MESSAGE_SERVICE_PASSWORD
           - name: RABBITMQ_USE_LONGNAME
             value: "true"
           - name: K8S_SERVICE_NAME
             value: rabbitmq
+
       - name: mongo
         image: mongo
         resources:
@@ -129,6 +206,7 @@ spec:
               key: MONGO_PASSWORD
         - name: MONGO_INITDB_DATABASE
           value: "poc"
+
       - name: mongo-express
         image: mongo-express
         resources:
@@ -139,12 +217,24 @@ spec:
         - containerPort: 8081
         env:
         - name: ME_CONFIG_BASICAUTH_USERNAME    
-          value: "datatorget"
+          valueFrom:
+            secretKeyRef:
+              name: secrets-datatorgetbackend
+              key: MONGO_USERNAME
         - name: ME_CONFIG_BASICAUTH_PASSWORD
-          value: "datatorget"
+          valueFrom:
+            secretKeyRef:
+              name: secrets-datatorgetbackend
+              key: MONGO_PASSWORD
         - name: ME_CONFIG_MONGODB_ADMINUSERNAME
-          value: "datatorget"
+          valueFrom:
+            secretKeyRef:
+              name: secrets-datatorgetbackend
+              key: MONGO_USERNAME
         - name: ME_CONFIG_MONGODB_ADMINPASSWORD
-          value: "datatorget"
+          valueFrom:
+            secretKeyRef:
+              name: secrets-datatorgetbackend
+              key: MONGO_PASSWORD
         - name: ME_CONFIG_MONGODB_SERVER
           value: "localhost"

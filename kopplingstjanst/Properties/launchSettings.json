@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "kopplingstjanst": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

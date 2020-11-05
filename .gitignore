@@ -339,3 +339,4 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 kubernetes/secrets-datatorgetbackend.yaml
+kubernetes/secrets-datatorgetbackend-local.yaml
