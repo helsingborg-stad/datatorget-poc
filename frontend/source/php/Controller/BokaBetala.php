@@ -32,6 +32,7 @@ class BokaBetala Extends BaseController {
    * @return void
    */
   public function actionCardPayment(array $req) {
+    
     $payment = $this->makePayment('swish', $req); 
 
     if($payment) {
@@ -48,6 +49,7 @@ class BokaBetala Extends BaseController {
    * @return void
    */
   public function actionSwishPayment(array $req) {
+    
     $payment = $this->makePayment('swish', $req); 
 
     if($payment) {

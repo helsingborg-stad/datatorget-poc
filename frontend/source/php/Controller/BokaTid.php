@@ -23,8 +23,8 @@ class BokaTid Extends BaseController {
 
     $cpage = isset($_GET['pagination']) ? $_GET['pagination'] : 1; 
     
-    $this->data['times'] = $this->getTimes(); 
-    $this->data['roomName'] = $this->getRoomName(); 
+    $this->data['times'] = $this->getTimes();
+    $this->data['roomName'] = $this->getRoomName();
 
     if(!$this->data['roomName']) {
       new Redirect('/', ['action' => '404']); 
@@ -107,13 +107,6 @@ class BokaTid Extends BaseController {
       new Redirect('/boka/tid', ['action' => 'payment-error-id']); 
     }
 
-    //Verify data
-    if(isset($req['data']) && base64_decode($req['data'], true)) {
-      $bookingData = $this->decodeData($req['data']); 
-    } else {
-      new Redirect('/boka/tid', ['action' => 'payment-error-data']); 
-    }
-
     //Get user data
     $user = new User();
 
@@ -125,15 +118,10 @@ class BokaTid Extends BaseController {
       'kundnr' => $user->get()->kundnr
     ]); 
 
-
-      var_dump($curl); 
-      die; 
-
     //Check if is valid response
     if($curl->isValid) {
       new Redirect('/boka/betala', [
-        'id'    => $req['id'],
-        'data'  => $req['data']
+        'id'    => $req['id']
       ]); 
     } else {
       new Redirect('/boka/tid', ['action' => 'payment-order-error']); 

@@ -42,7 +42,7 @@
             @slot('secondary')
 
               @if($time->isAvailable)
-                @button(['href' => '/boka/tid?id=' . $time->uid . "&data=" . $time->passTrough . "&action=make-booking"])
+                @button(['href' => '/boka/tid?id=' . $time->uid . "&action=make-booking"])
                   Boka
                 @endbutton
               @endif
