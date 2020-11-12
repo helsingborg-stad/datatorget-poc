@@ -32,7 +32,7 @@ class BokaTid Extends BaseController {
 
     //Roomname not found
     if(!$this->data['roomName']) {
-      new Redirect('/', ['action' => '404', 'origin' => 'bokatid']); 
+      new Redirect('/', ['action' => '404', 'origin' => 'bokatid', 'state' => 'roomname']); 
     }
 
     //Check response
@@ -54,7 +54,7 @@ class BokaTid Extends BaseController {
   public function getRoomName() {
     
     $curl = new Curl('GET', MS_BOOKING . '/api/v1/resurs/hamta', [
-      'resursId' => $this->decodeData($_GET['id'])
+      'resursId' => $_GET['id']
     ]);
 
     if($curl->isValid == true) {
