@@ -10,6 +10,12 @@ class Home Extends BaseController {
  
   public function __construct() {
     parent::__construct(__CLASS__);
+
+    $user = new User();
+
+    if($user->isAuthenticated()) {
+      new Redirect('/boka'); 
+    }
   }
 
   /**
