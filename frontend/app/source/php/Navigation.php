@@ -40,6 +40,7 @@ class Navigation
 
         if(!$user->isAuthenticated()) {
             $dirContents = array_diff($dirContents, [
+                'boka',
                 'boka.blade.php',
                 'valj-lokal.blade.php',
                 'mitt-konto.blade.php'
@@ -48,7 +49,6 @@ class Navigation
             $dirContents = array_diff($dirContents, [
                 'om-bokningsportalen.blade.php',
                 'registrera-konto.blade.php',
-                'boka.blade.php',
             ]);
         }
 

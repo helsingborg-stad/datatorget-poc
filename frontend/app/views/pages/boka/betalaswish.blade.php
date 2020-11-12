@@ -27,7 +27,7 @@
           'text' => 'Kortbetalning',
           'size' => 'md',
           'type' => 'basic',
-          'href' => '/boka/betala?id=' . $_GET['id'],
+          'href' => '/boka/betala?id=' . $_GET['id'] . "&response=" . $_GET['response'],
         ])
         @endbutton
 
@@ -36,7 +36,6 @@
           'text' => 'Swish',
           'size' => 'md',
           'type' => 'basic',
-          'href' => '/boka/betalaswish?id=' . $_GET['id'],
           'attributeList' => [
             'disabled' => 'disabled',
           ]
@@ -46,11 +45,10 @@
 
     </div>
 
-
     @form([
       'id' => 'swish-payment',
       'method' => 'POST',
-      'action' => '/boka/betala?action=swishPayment&id=' . $_GET['id']
+      'action' => '/boka/betala?action=swishPayment&id=' . $_GET['id'] . "&response=" . $_GET['response']
     ])
       @field([
           'type' => 'text',

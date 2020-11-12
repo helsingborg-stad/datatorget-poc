@@ -9,42 +9,52 @@ use \HbgStyleGuide\Helper\User as User;
 class BokaTid Extends BaseController {
   
   public function __construct() {
+    
     parent::__construct(__CLASS__);
 
     //Prevent uninlogged users 
     $user = new User();
     if(!$user->isAuthenticated()) {
-      new Redirect('/', ['action' => 'not-authenticated']); 
+      new Redirect('/', ['action' => 'not-authenticated', 'origin' => 'bokatid']); 
     }
 
+    //Check if id exists
     if(!isset($_GET['id'])) {
-      new Redirect('/', ['action' => '404']); 
+      new Redirect('/', ['action' => '404', 'origin' => 'bokatid']); 
     }
 
+    //Get current page
     $cpage = isset($_GET['pagination']) ? $_GET['pagination'] : 1; 
     
-    $this->data['times'] = $this->getTimes();
+    //Get avabile times
+    $this->data['times']    = $this->getTimes();
     $this->data['roomName'] = $this->getRoomName();
 
+    //Roomname not found
     if(!$this->data['roomName']) {
-      new Redirect('/', ['action' => '404']); 
+      new Redirect('/', ['action' => '404', 'origin' => 'bokatid']); 
     }
 
     //Check response
     if($this->data['times']) {
-      $this->data['pages'] = $this->getPages(count($this->data['times'])); 
+      $this->data['pages']        = $this->getPages(count($this->data['times'])); 
       $this->data['currentTimes'] = $this->data['times'][$cpage];
     } else {
       $this->data['currentTimes'] = [];
-      $this->data['pages'] = false;
+      $this->data['pages']        = false;
     }
     
   }
 
+  /**
+   * Get the room name
+   *
+   * @return string | false
+   */
   public function getRoomName() {
     
     $curl = new Curl('GET', MS_BOOKING . '/api/v1/resurs/hamta', [
-      'resursId' => $_GET['id']
+      'resursId' => $this->decodeData($_GET['id'])
     ]);
 
     if($curl->isValid == true) {
@@ -55,11 +65,16 @@ class BokaTid Extends BaseController {
 
   }
 
+  /**
+   * Get avabile times
+   *
+   * @return void
+   */
   public function getTimes() {
 
     //Make req
     $curl = new Curl('GET', MS_BOOKING . '/api/v1/resurstid/lista', [
-      'resursId' => $_GET['id']
+      'resursId' => $this->decodeData($_GET['id'])
     ]);
 
     if($curl->isValid == true) {
@@ -68,13 +83,13 @@ class BokaTid Extends BaseController {
       foreach($curl->response as &$item) {
 
         //Translate data
-        $item->uid = base64_encode($item->resurstidId);
+        $item->uid = $this->encodeData($item->resurstidId);
         $item->day = date("j F Y", strtotime($item->startTid));
         $item->startTime = date("H:i", strtotime($item->startTid));
         $item->endTime = date("H:i", strtotime($item->slutTid));
         $item->isAvailable = (bool) $item->tillganglig;
         $item->bookingNumber = (int) $item->bokningsnr;
-        $item->passTrough = base64_encode(json_encode($item));
+        $item->passTrough = $this->encodeData($item);
 
         //Remove untranslated
         unset($item->startTid);
@@ -90,6 +105,12 @@ class BokaTid Extends BaseController {
     return false; 
   }
 
+  /**
+   * Pagination wathcer
+   *
+   * @param   int    $max        Max pages to render
+   * @return  array  $stack      The link stack
+   */
   public function getPages($max) {
     $stack = array();
     for($i = 1; $i < $max; $i++) {
@@ -98,14 +119,23 @@ class BokaTid Extends BaseController {
     return $stack; 
   }
 
+  /**
+   * Registeres booking
+   *
+   * @param array $req
+   * @return void
+   */
   public function actionMakeBooking($req) {
 
     //Verify signature
-    if(isset($req['id']) && base64_decode($req['id'], true)) {
-      $req['id'] = base64_decode($req['id']);
+    if(isset($req['data']) && base64_decode($req['data'], true)) {
+      $req['data'] = $this->decodeData($req['data']);
     } else {
-      new Redirect('/boka/tid', ['action' => 'payment-error-id']); 
+      new Redirect('/boka/tid', ['action' => 'payment-error-id', 'origin' => 'bokatid']); 
     }
+
+    //Make accessable
+    $bookingData = $req['data']; 
 
     //Get user data
     $user = new User();
@@ -121,10 +151,12 @@ class BokaTid Extends BaseController {
     //Check if is valid response
     if($curl->isValid) {
       new Redirect('/boka/betala', [
-        'id'    => $req['id']
+        'id'    => $this->encodeData($req['bookingid']),
+        'response' => $this->encodeData($curl->response),
+        'origin' => 'bokatid'
       ]); 
     } else {
-      new Redirect('/boka/tid', ['action' => 'payment-order-error']); 
-    } 
+      new Redirect('/boka/tid', ['action' => 'payment-order-error', 'origin' => 'bokatid']); 
+    }
   }
 }

@@ -63,7 +63,7 @@ class MittKonto Extends BaseController {
 
     //Make req
     $curl = new Curl('GET', MS_BOOKING . '/api/v1/bokning/lista', [
-      //'kundnr' => $knr
+      'kundnr' => $knr
     ]);
     
     if($curl->isValid) {
@@ -88,7 +88,7 @@ class MittKonto Extends BaseController {
         $item->isPaid = (bool) $item->betald; 
         $item->isCanceled = (bool) $item->avbokad; 
         $item->resourceName = $resourceName; 
-        $item->passTrough = base64_encode(json_encode($item)); 
+        $item->passTrough = $this->encodeData($item); 
 
         //Remove untranslated
         unset($item->startTid);

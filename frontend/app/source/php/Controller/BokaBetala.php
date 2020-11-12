@@ -17,12 +17,9 @@ class BokaBetala Extends BaseController {
       new Redirect('/', ['action' => 'not-authenticated']); 
     }
 
-    if(!isset($_GET['id'])) {
-      new Redirect('/', ['action' => '404']); 
+    if(!isset($_GET['response'])) {
+      new Redirect('/', ['action' => '404', 'origin' => 'bokabetala']); 
     }
-
-    //Get data
-    $this->data['resourceTimeId'] = base64_encode($_GET['id']);
   }
 
   /**
@@ -33,7 +30,7 @@ class BokaBetala Extends BaseController {
    */
   public function actionCardPayment(array $req) {
     
-    $payment = $this->makePayment('swish', $req); 
+    $payment = $this->makePayment('card', $req); 
 
     if($payment) {
       new Redirect('/boka/klar', ['action' => 'payment-success', 'method' => 'card']); 
@@ -59,7 +56,50 @@ class BokaBetala Extends BaseController {
     new Redirect('/boka/betalaswish', ['action' => 'payment-error', 'id' => $req['id']]);
   }
 
+  /**
+   * Worlds most refined and awesome payment method. 
+   * Or a peice of junk. 
+   *
+   * @param string $method
+   * @param array $req
+   * @return void
+   */
   private function makePayment($method, $req) {
-    return true; 
+    
+    //Decide response 
+    $response = $this->decodeData($req['response']); 
+
+    //Get current user
+    $user = new User();
+
+    //Make req
+    $curl = new Curl('GET', MS_PAYMENT . '/api/v1/betalorder/sok', [
+      'referens' => $response->bokningsnr,
+      'kundnr' => $user->get()->kundnr
+    ]); 
+
+    //Check if is valid response
+    if($curl->isValid) {
+
+      $curl->response = (array) $curl->response; 
+
+      if(isset($curl->response[0])) {
+        
+        $latest = $curl->response[0]; 
+     
+        $curl = new Curl('GET', MS_PAYMENT . '/api/v1/betalorder/betala', [
+          'betalorderid' => $latest->betalorderid,
+          'belopp' => ($latest->beloppTotalt - $latest->beloppBetalt)
+        ]); 
+     
+        if($curl->isValid) {
+          return true; 
+        }
+     
+      }
+
+    }
+
+    return false; 
   }
 }

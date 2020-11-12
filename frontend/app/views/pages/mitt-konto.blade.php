@@ -116,7 +116,7 @@
                     @endbutton
 
                     @if(!$booking->betald)
-                        @button(['href' => '/boka/betala?id=' . $booking->uid, 'classList' => ['u-margin__left--2']])
+                        @button(['href' => '/boka/betala?id=' . $booking->uid . "&response=" . $booking->passTrough , 'classList' => ['u-margin__left--2']])
                             Betala
                         @endbutton
                     @endif
