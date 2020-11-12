@@ -86,9 +86,8 @@
       Mina bokningar
     @endtypography
 
-
-    @collection(['sharp' => true, 'bordered' => true])
-      @if($bookings) 
+    @if($bookings) 
+      @collection(['sharp' => true, 'bordered' => true])
         @foreach($bookings as $booking)
           @collection__item(['classList' => [
             ($booking->isCanceled ? 'is-canceled' : '')
@@ -126,23 +125,22 @@
             @endslot
           @endcollection__item
         @endforeach
-      @else
-        @notice([
-          'type' => 'info',
-          'message' => [
-              'text' => 'Du har inte gjort några bokningar ännu.',
-              'size' => 'sm'
-          ],
-          'icon' => [
-              'name' => 'report',
-              'size' => 'md',
-              'color' => 'white'
-          ]
-        ])
-        @endnotice
-      @endif
-
-    @endcollection
+      @endcollection
+    @else
+      @notice([
+        'type' => 'info',
+        'message' => [
+            'text' => 'Du har inte gjort några bokningar ännu.',
+            'size' => 'sm'
+        ],
+        'icon' => [
+            'name' => 'report',
+            'size' => 'md',
+            'color' => 'white'
+        ]
+      ])
+      @endnotice
+    @endif
 
   @endpaper
 @stop
