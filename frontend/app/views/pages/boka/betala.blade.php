@@ -71,7 +71,7 @@
       ])
       @endfield
 
-        <div class="s-group">
+      @group()
           @field([
             'type' => 'text',
             'value' => date("m"),
@@ -80,7 +80,7 @@
                 'name' => 'expirymonth',
             ],
             'label' => "Giltigt till (månad)",
-            'classList' => []
+            'classList' => ['u-width--50']
           ])
           @endfield
           @field([
@@ -90,10 +90,11 @@
                 'type' => 'number',
                 'name' => 'expiryyear',
             ],
-            'label' => "Giltigt till (år)"
+            'label' => "Giltigt till (år)",
+            'classList' => ['u-width--50']
           ])
           @endfield
-        </div>
+      @endgroup
 
       @field([
           'type' => 'text',

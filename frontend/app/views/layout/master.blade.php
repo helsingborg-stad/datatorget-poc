@@ -78,6 +78,18 @@
             border-bottom-right-radius: 0; 
         }
 
+        .c-field {
+            margin-bottom: 16px;
+        }
+
+        .c-button {
+            max-height: 48px; 
+        }
+
+        .c-group--horizontal>*:not(:first-child) {
+            margin-left: 0 !important;
+        }
+
     </style>
 
 </head>

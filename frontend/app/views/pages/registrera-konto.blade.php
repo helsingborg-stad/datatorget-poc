@@ -1,5 +1,21 @@
 @extends('layout.containers.page')
 @section('article')
+
+    @notice([
+        'type' => 'warning',
+        'message' => [
+            'text' => '<strong>Använd inte riktiga personuppgifter!</strong><p>Det här är en proo-of-concept applikation som inte uppfyller de säkerhetskrav som normalt ställs på applikationer som hanterar personuppgifter. Använd därför inga riktiga personuppgifter vid registrering.</p>',
+            'size' => 'sm'
+        ],
+        'icon' => [
+            'name' => 'report',
+            'size' => 'md',
+            'color' => 'white'
+        ],
+        'classList' => ['u-margin__bottom--4', 'o-grid-12', 'o-grid-6@md', 'u-align-self--center']
+    ])
+    @endnotice
+
     @paper([
         'padding'=> 4, 
         'classList' => ['o-grid-12', 'o-grid-6@md', 'u-align-self--center']

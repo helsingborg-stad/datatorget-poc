@@ -110,15 +110,18 @@
 
                 @if(!$booking->isCanceled)
                     
-                    @button(['href' => '/boka/avboka?id='.$booking->uid])
-                        Avboka
-                    @endbutton
+                    @group()
 
-                    @if(!$booking->betald)
-                        @button(['href' => '/boka/betala?id=' . $booking->uid . "&response=" . $booking->passTrough , 'classList' => ['u-margin__left--2']])
-                            Betala
-                        @endbutton
-                    @endif
+                      @button(['href' => '/boka/avboka?id='.$booking->uid])
+                          Avboka
+                      @endbutton
+
+                      @if(!$booking->betald)
+                          @button(['href' => '/boka/betala?id=' . $booking->uid . "&response=" . $booking->passTrough , 'classList' => ['u-margin__left--2']])
+                              Betala
+                          @endbutton
+                      @endif
+                    @endgroup
 
                 @endif
 
