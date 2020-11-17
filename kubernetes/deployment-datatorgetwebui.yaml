@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-datatorgetwebui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: datatorgetwebui
+  template:
+    metadata:
+      labels:
+        app: datatorgetwebui
+    spec:
+      containers:
+      - name: webui
+        image: datatorgetpoc/webui
+        resources:
+          limits:
+            memory: "256Mi"
+            cpu: "250m"
+        ports:
+        - containerPort: 80
+        env:
+        - name: MS_BOOKING
+          value: http://193.180.109.41:30001
+        - name: MS_USER
+          value: http://193.180.109.41:30002
+        - name: MS_PAYMENT
+          value: http://193.180.109.41:30004

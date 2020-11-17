@@ -12,6 +12,13 @@ spec:
       labels:
         app: datatorgetbackend
     spec:
+      volumes:
+      - name: volume-mongo
+        # hostPath:
+        #     path: "/datatorget/mongodata"
+        #     type: DirectoryOrCreate
+        # persistentVolumeClaim:
+        #   claimName: volumeclaim-mongo
       containers:
       - name: bokningsapi
         image: datatorgetpoc/bokningsapi
@@ -151,6 +158,9 @@ spec:
           value: "http://localhost:30004/api/v1"
         - name: BOKNINGSAPI
           value: "http://localhost:30001/api/v1"
+        # volumeMounts:
+        #   - mountPath: "/data/db"
+        #     name: volume-mongo
 
       - name: rabbitmq
         image: rabbitmq:management
@@ -198,6 +208,9 @@ spec:
             cpu: "250m"
         ports:
         - containerPort: 27017
+        # volumeMounts:
+        #   - mountPath: "/data/db"
+        #     name: volume-mongo
         env:
         - name: MONGO_INITDB_ROOT_USERNAME
           valueFrom:
@@ -210,7 +223,7 @@ spec:
               name: secrets-datatorgetbackend
               key: MONGO_PASSWORD
         - name: MONGO_INITDB_DATABASE
-          value: "poc"
+          value: "datatorget"
 
       - name: mongo-express
         image: mongo-express

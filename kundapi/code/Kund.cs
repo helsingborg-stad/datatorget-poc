@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace kundapi.code
 {
+    [MongoDB.Bson.Serialization.Attributes.BsonIgnoreExtraElements]
     public class Kund
     {
         public int Kundnr { get; set; }

@@ -36,7 +36,7 @@ namespace kommunikationsapi.code
             client.Send(msg);
         }
 
-        public static async void SendBySendGrid(EpostMeddelande meddelande)
+        public static async Task SendBySendGrid(EpostMeddelande meddelande)
         {
             var msg = new MessageBuilder()
                 .SetFrom(meddelande.AvsandareEpost)

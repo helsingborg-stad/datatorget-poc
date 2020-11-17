@@ -1,0 +1,27 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-kong-backend
+  annotations:
+    kubernetes.io/ingress.class: kong
+    konghq.com/plugins: rl-by-ip
+    konghq.com/strip-path: "true"
+spec:
+  rules:
+  - host: localhost:30080
+    http:
+      paths:
+      - path: /bokningsapi
+        backend:
+          serviceName: svc-datatorgetbackend
+          servicePort: 30001
+---
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: rl-by-ip
+config:
+  minute: 100000
+  limit_by: ip
+  policy: local
+plugin: rate-limiting

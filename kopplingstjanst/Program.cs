@@ -7,6 +7,25 @@ namespace kopplingstjanst
     {
         static void Main(string[] args)
         {
+            for (var i = 0; i < 10; i++)
+            {
+                try
+                {
+                    Listen();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error: {ex.Message}");
+                    Console.WriteLine("Waiting 10 seconds before retrying.");
+                    System.Threading.Thread.Sleep(10000);
+                }
+            }
+
+            Console.WriteLine("Fatal error. Terminating application.");
+        }
+
+        private static void Listen()
+        { 
             var factory = new ConnectionFactory { HostName = _Config.MessageServiceHost, Port = _Config.MessageServicePort, UserName = _Config.MessageServiceUserName, Password = _Config.MessageServicePassword };
             using (var connection = factory.CreateConnection())
             using (var model = connection.CreateModel())
@@ -14,7 +33,7 @@ namespace kopplingstjanst
                 var svc1 = new BokningTillBetalorder(model, "bokning", _Config.BetalningsApi);
                 var svc2 = new BetalningTillBokning(model, "betalning", _Config.BokningApi);
 
-
+                Console.WriteLine("Started successfully");
 
                 //model.ExchangeDeclare(exchange: "bokning",
                 //                    type: ExchangeType.Fanout,

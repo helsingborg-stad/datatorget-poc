@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-wso2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wso2
+  template:
+    metadata:
+      labels:
+        app: wso2
+    spec:
+      containers:
+      - name: wso2am
+        image: docker.wso2.com/wso2am
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 9443
+        - containerPort: 8243
+        - containerPort: 8280

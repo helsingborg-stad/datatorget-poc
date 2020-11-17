@@ -16,7 +16,7 @@ namespace kommunikationsapi.controllers
     {
         [HttpPost]
         [Route("skicka")]
-        public void Skicka(string mottagareEpost, string avsandareEpost, string amne, string meddelandetext)
+        public async Task Skicka(string mottagareEpost, string avsandareEpost, string amne, string meddelandetext)
         {
             var meddelande = new EpostMeddelande
             {
@@ -28,7 +28,7 @@ namespace kommunikationsapi.controllers
             };
 
             //MailServer.SendBySmtp(meddelande);
-            MailServer.SendBySendGrid(meddelande);
+            await MailServer.SendBySendGrid(meddelande);
         }
 
         [HttpPost]
