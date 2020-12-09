@@ -20,6 +20,10 @@ namespace kundapi.code
         public static void Init(IWebHostEnvironment env)
         {
             Kunder = new ConcurrentDictionary<int, Kund>();
+
+            // Add a default customer
+            var kund = new Kund { Kundnr = ++SenasteKundnr, Epost = "datatorget@helsingborg.se", Namn = "Testkund", Personnr = "1212121212" };
+            Kunder.TryAdd(kund.Kundnr, kund);
         }
 
         public static void LaggTillNyKund(Kund kund)

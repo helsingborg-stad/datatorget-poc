@@ -47,6 +47,8 @@ spec:
           value: "bokning"
         - name: MESSAGE_SERVICE_ENABLED
           value: "True"
+        - name: OAUTH_AUTHORITY
+          value: "http://datatorget2.helsingborg.se:30099"
 
       - name: kundapi
         image: datatorgetpoc/kundapi
@@ -75,6 +77,8 @@ spec:
           value: "kund"
         - name: MESSAGE_SERVICE_ENABLED
           value: "True"
+        - name: OAUTH_AUTHORITY
+          value: "http://datatorget2.helsingborg.se:30099"
           
       - name: kommunikationsapi
         image: datatorgetpoc/kommunikationsapi
@@ -104,6 +108,8 @@ spec:
             secretKeyRef:
               name: secrets-datatorgetbackend
               key: SENDGRID_APIKEY
+        - name: OAUTH_AUTHORITY
+          value: "http://datatorget2.helsingborg.se:30099"
 
       - name: betalningsapi
         image: datatorgetpoc/betalningsapi
@@ -132,6 +138,8 @@ spec:
           value: "betalning"
         - name: MESSAGE_SERVICE_ENABLED
           value: "True"
+        - name: OAUTH_AUTHORITY
+          value: "http://datatorget2.helsingborg.se:30099"
 
       - name: kopplingstjanst
         image: datatorgetpoc/kopplingstjanst
@@ -158,9 +166,21 @@ spec:
           value: "http://localhost:30004/api/v1"
         - name: BOKNINGSAPI
           value: "http://localhost:30001/api/v1"
+        - name: OAUTH_AUTHORITY
+          value: "http://datatorget2.helsingborg.se:30099"
         # volumeMounts:
         #   - mountPath: "/data/db"
         #     name: volume-mongo
+
+      - name: identitysvc
+        image: datatorgetpoc/identitysvc
+        resources:
+          limits:
+            memory: "64Mi"
+            cpu: "100m"
+        env:
+        - name: OAUTH_AUTHORITY
+          value: "http://datatorget2.helsingborg.se:30099"
 
       - name: rabbitmq
         image: rabbitmq:management
@@ -200,59 +220,59 @@ spec:
           - name: K8S_SERVICE_NAME
             value: rabbitmq
 
-      - name: mongo
-        image: mongo
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "250m"
-        ports:
-        - containerPort: 27017
-        # volumeMounts:
-        #   - mountPath: "/data/db"
-        #     name: volume-mongo
-        env:
-        - name: MONGO_INITDB_ROOT_USERNAME
-          valueFrom:
-            secretKeyRef:
-              name: secrets-datatorgetbackend
-              key: MONGO_USERNAME
-        - name: MONGO_INITDB_ROOT_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: secrets-datatorgetbackend
-              key: MONGO_PASSWORD
-        - name: MONGO_INITDB_DATABASE
-          value: "datatorget"
+      # - name: mongo
+      #   image: mongo
+      #   resources:
+      #     limits:
+      #       memory: "128Mi"
+      #       cpu: "250m"
+      #   ports:
+      #   - containerPort: 27017
+      #   # volumeMounts:
+      #   #   - mountPath: "/data/db"
+      #   #     name: volume-mongo
+      #   env:
+      #   - name: MONGO_INITDB_ROOT_USERNAME
+      #     valueFrom:
+      #       secretKeyRef:
+      #         name: secrets-datatorgetbackend
+      #         key: MONGO_USERNAME
+      #   - name: MONGO_INITDB_ROOT_PASSWORD
+      #     valueFrom:
+      #       secretKeyRef:
+      #         name: secrets-datatorgetbackend
+      #         key: MONGO_PASSWORD
+      #   - name: MONGO_INITDB_DATABASE
+      #     value: "datatorget"
 
-      - name: mongo-express
-        image: mongo-express
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "250m"
-        ports:
-        - containerPort: 8081
-        env:
-        - name: ME_CONFIG_BASICAUTH_USERNAME    
-          valueFrom:
-            secretKeyRef:
-              name: secrets-datatorgetbackend
-              key: MONGO_USERNAME
-        - name: ME_CONFIG_BASICAUTH_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: secrets-datatorgetbackend
-              key: MONGO_PASSWORD
-        - name: ME_CONFIG_MONGODB_ADMINUSERNAME
-          valueFrom:
-            secretKeyRef:
-              name: secrets-datatorgetbackend
-              key: MONGO_USERNAME
-        - name: ME_CONFIG_MONGODB_ADMINPASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: secrets-datatorgetbackend
-              key: MONGO_PASSWORD
-        - name: ME_CONFIG_MONGODB_SERVER
-          value: "localhost"
+      # - name: mongo-express
+      #   image: mongo-express
+      #   resources:
+      #     limits:
+      #       memory: "128Mi"
+      #       cpu: "250m"
+      #   ports:
+      #   - containerPort: 8081
+      #   env:
+      #   - name: ME_CONFIG_BASICAUTH_USERNAME    
+      #     valueFrom:
+      #       secretKeyRef:
+      #         name: secrets-datatorgetbackend
+      #         key: MONGO_USERNAME
+      #   - name: ME_CONFIG_BASICAUTH_PASSWORD
+      #     valueFrom:
+      #       secretKeyRef:
+      #         name: secrets-datatorgetbackend
+      #         key: MONGO_PASSWORD
+      #   - name: ME_CONFIG_MONGODB_ADMINUSERNAME
+      #     valueFrom:
+      #       secretKeyRef:
+      #         name: secrets-datatorgetbackend
+      #         key: MONGO_USERNAME
+      #   - name: ME_CONFIG_MONGODB_ADMINPASSWORD
+      #     valueFrom:
+      #       secretKeyRef:
+      #         name: secrets-datatorgetbackend
+      #         key: MONGO_PASSWORD
+      #   - name: ME_CONFIG_MONGODB_SERVER
+      #     value: "localhost"

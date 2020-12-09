@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-krakend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: krakend
+  template:
+    metadata:
+      labels:
+        app: krakend
+    spec:
+      volumes:
+      - name: volume-krakend
+        hostPath:
+            # path: "/c/Johan/Dev/datatorget-poc/kubernetes"
+            path: "/run/desktop/mnt/host/c/Johan/Dev/datatorget-poc/kubernetes"
+            type: Directory
+      containers:
+      - name: krakend
+        image: devopsfaith/krakend
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        # command: ["run"]
+        # args: ["--config", "/etc/krakend/krakend.json "]
+        ports:
+        - containerPort: 30099
+        volumeMounts:
+          - mountPath: "/etc/krakend"
+            name: volume-krakend

@@ -7,6 +7,10 @@ namespace kopplingstjanst
     {
         static void Main(string[] args)
         {
+            TestaOauth.Run();
+            Console.ReadLine();
+            return;
+
             for (var i = 0; i < 10; i++)
             {
                 try

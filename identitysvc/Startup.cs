@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.IO;
-using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -13,9 +7,12 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using kundapi.code;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace kundapi
+namespace identitysvc
 {
     public class Startup
     {
@@ -30,17 +27,21 @@ namespace kundapi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSwaggerGen(c => {
-                // var assembly = Assembly.GetExecutingAssembly();
-                // var basePath = Path.GetDirectoryName(assembly.Location);
-                // var path = Path.Combine(basePath, "kundapi.xml");
-                // c.IncludeXmlComments(path);
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "IdentitySvc", Version = "v1" });
             });
+
+            var builder = services.AddIdentityServer()
+                .AddInMemoryApiScopes(Config.ApiScopes)
+                .AddInMemoryClients(Config.Clients);
+
+            builder.AddDeveloperSigningCredential();
 
             services.AddAuthentication("Bearer")
                 .AddJwtBearer("Bearer", options =>
                 {
-                    options.Authority = _Config.OauthAuthority;
+                    options.Authority = Config.OauthAuthority;
 
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
@@ -57,19 +58,13 @@ namespace kundapi
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "identitysvc v1"));
             }
 
-            // Enable middleware to serve generated Swagger as a JSON endpoint.
-            app.UseSwagger();
-
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
-            // specifying the Swagger JSON endpoint.
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "kundapi V1");
-            });
-
             app.UseRouting();
+
+            app.UseIdentityServer();
 
             app.UseAuthentication();
             app.UseAuthorization();
@@ -78,8 +73,6 @@ namespace kundapi
             {
                 endpoints.MapControllers();
             });
-
-            _DataStore.Init(env);
         }
     }
 }

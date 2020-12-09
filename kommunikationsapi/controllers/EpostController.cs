@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
 using kommunikationsapi.code;
 
 namespace kommunikationsapi.controllers
 {
     [ApiController]
+    [Authorize]
     [Route("api/v1/epost")]
     public class EpostController : ControllerBase
     {
