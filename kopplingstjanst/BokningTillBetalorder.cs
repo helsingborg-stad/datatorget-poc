@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using System.Net;
+using System.Threading.Tasks;
+using System.Net.Http;
+using IdentityModel.Client;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
@@ -18,7 +21,7 @@ namespace kopplingstjanst
             model.QueueBind(queue: queueName, exchange: exchange, routingKey: "");
 
             var consumer = new EventingBasicConsumer(model);
-            consumer.Received += (model, ea) =>
+            consumer.Received += async (model, ea) =>
             {
                 var doc = JsonDocument.Parse(ea.Body);
 
@@ -29,14 +32,23 @@ namespace kopplingstjanst
 
                 if (pris != beloppBetalt)
                 {
-                    using (var client = new WebClient())
-                    {
-                        client.DownloadString($"{apiurl}/betalorder/skapa?applikation=bokning&referens={bokningsnr}&beskrivning=bokning&belopp={pris - beloppBetalt}&kundnr={kundnr}");
-                    }
+                    Console.WriteLine($"BokningTillBetalorder bokningsnr:{bokningsnr} pris:{pris} beloppBetalt:{beloppBetalt} kundnr:{kundnr}");
+
+                    await SkapaBetalorder(apiurl, bokningsnr, pris - beloppBetalt, kundnr);
                 }
             };
 
             model.BasicConsume(queue: queueName, autoAck: true, consumer: consumer);
+        }
+
+        private async Task SkapaBetalorder(string apiurl, int bokningsnr, int belopp, int kundnr)
+        {
+            var token = await Oauth.RequestClientToken();
+            using (var client = new HttpClient())
+            {
+                client.SetBearerToken(token.AccessToken);
+                await client.GetStringAsync($"{apiurl}/betalorder/skapa?applikation=bokning&referens={bokningsnr}&beskrivning=bokning&belopp={belopp}&kundnr={kundnr}");
+            }
         }
     }
 }
