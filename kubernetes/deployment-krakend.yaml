@@ -28,7 +28,7 @@ spec:
         # command: ["run"]
         # args: ["--config", "/etc/krakend/krakend.json "]
         ports:
-        - containerPort: 30099
+        - containerPort: 30100
         volumeMounts:
           - mountPath: "/etc/krakend"
             name: volume-krakend

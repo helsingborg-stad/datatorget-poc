@@ -5,7 +5,7 @@
   "cache_ttl": "300s",
   "output_encoding": "json",
   "name": "Kundapi",
-  "port": 30099,
+  "port": 30100,
   "endpoints": [
     {
       "endpoint": "/api/v1",

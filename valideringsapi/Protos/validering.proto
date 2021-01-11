@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option csharp_namespace = "valideringsapi";
+
+package valideringsapi;
+
+// The greeting service definition.
+service Validering {
+  // Sends a greeting
+  rpc ValideraEpost (ValideringsRequest) returns (ValideringsReply);
+  rpc ValideraPersonnr (ValideringsRequest) returns (ValideringsReply);
+}
+
+// The request message containing the user's name.
+message ValideringsRequest {
+  string str = 1;
+}
+
+// The response message containing the greetings.
+message ValideringsReply {
+  bool resultat = 1;
+}

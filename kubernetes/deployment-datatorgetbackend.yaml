@@ -19,6 +19,9 @@ spec:
         #     type: DirectoryOrCreate
         # persistentVolumeClaim:
         #   claimName: volumeclaim-mongo
+      - name: volume-config-rabbitmq
+        configMap:
+            name: config-rabbitmq
       containers:
       - name: bokningsapi
         image: datatorgetpoc/bokningsapi
@@ -141,6 +144,18 @@ spec:
         - name: OAUTH_AUTHORITY
           value: "http://datatorget2.helsingborg.se:30099"
 
+      - name: valideringsapi
+        image: datatorgetpoc/valideringsapi
+        resources:
+          limits:
+            memory: "64Mi"
+            cpu: "250m"
+        ports:
+        - containerPort: 30005
+        env:
+        - name: OAUTH_AUTHORITY
+          value: "http://datatorget2.helsingborg.se:30099"
+
       - name: kopplingstjanst
         image: datatorgetpoc/kopplingstjanst
         resources:
@@ -195,7 +210,13 @@ spec:
           - name: amqp
             protocol: TCP
             containerPort: 5672
+        volumeMounts:
+          - name: volume-config-rabbitmq
+            mountPath: /etc/rabbitmq/config
+            readOnly: true
         env:
+          - name: RABBITMQ_ENABLED_PLUGINS_FILE
+            value: /etc/rabbitmq/config/enabled_plugins
           - name: MY_POD_NAME
             valueFrom:
               fieldRef:

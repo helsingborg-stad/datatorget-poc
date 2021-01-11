@@ -12,7 +12,7 @@ using kommunikationsapi.code;
 namespace kommunikationsapi.controllers
 {
     [ApiController]
-    [Authorize]
+    //[Authorize]
     [Route("api/v1/epost")]
     public class EpostController : ControllerBase
     {

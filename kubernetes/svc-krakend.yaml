@@ -6,8 +6,8 @@ spec:
   type: NodePort
   ports:
   - name: krakend
-    port: 30099
-    targetPort: 30099
-    nodePort: 30099
+    port: 30100
+    targetPort: 30100
+    nodePort: 30100
   selector:
     app: krakend
