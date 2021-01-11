@@ -156,6 +156,18 @@ spec:
         - name: OAUTH_AUTHORITY
           value: "http://datatorget2.helsingborg.se:30099"
 
+      - name: crmapi
+        image: datatorgetpoc/crmapi
+        resources:
+          limits:
+            memory: "64Mi"
+            cpu: "250m"
+        ports:
+        - containerPort: 30006
+        env:
+        - name: OAUTH_AUTHORITY
+          value: "http://datatorget2.helsingborg.se:30099"
+
       - name: kopplingstjanst
         image: datatorgetpoc/kopplingstjanst
         resources:

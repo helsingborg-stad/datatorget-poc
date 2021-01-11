@@ -18,7 +18,7 @@ namespace kommunikationsapi.controllers
     {
         [HttpPost]
         [Route("skicka")]
-        public async Task Skicka(string mottagareEpost, string avsandareEpost, string amne, string meddelandetext)
+        public async Task Skicka(string mottagareEpost, string avsandareEpost, string amne, [FromBody]SkickaBody body)
         {
             var meddelande = new EpostMeddelande
             {
@@ -26,7 +26,7 @@ namespace kommunikationsapi.controllers
                 MottagareEpost = mottagareEpost,
                 AvsandareEpost = avsandareEpost,
                 Amne = amne,
-                Meddelandetext = meddelandetext
+                Meddelandetext = body.Meddelandetext
             };
 
             //MailServer.SendBySmtp(meddelande);
@@ -35,7 +35,7 @@ namespace kommunikationsapi.controllers
 
         [HttpPost]
         [Route("skickasenare")]
-        public EpostMeddelande SkickaSenare(string mottagareEpost, string avsandareEpost, string amne, string meddelandetext, DateTime leveranstid, string referens, string applikation)
+        public EpostMeddelande SkickaSenare(string mottagareEpost, string avsandareEpost, string amne, [FromBody] SkickaBody body, DateTime leveranstid, string referens, string applikation)
         {
             var meddelande = new EpostMeddelande
             {
@@ -43,7 +43,7 @@ namespace kommunikationsapi.controllers
                 MottagareEpost = mottagareEpost,
                 AvsandareEpost = avsandareEpost,
                 Amne = amne,
-                Meddelandetext = meddelandetext,
+                Meddelandetext = body.Meddelandetext,
                 Leveranstid = leveranstid,
                 Referens = referens,
                 Applikation = applikation

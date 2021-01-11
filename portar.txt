@@ -3,6 +3,7 @@
 30003 kommunikationsapi
 30004 betalningsapi
 30005 valideringsapi
+30006 crmapi
 30080 web ui
 30099 identitetsserver
 30100 krakend

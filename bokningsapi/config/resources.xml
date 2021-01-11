@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
-  <resource id="room1" name="Little Big Planet" type="room" pricePerHour="100">
+  <resource id="room1" name="Stora Hallen" type="room" pricePerHour="100">
     <schedule>
       <day id="monday" startTime="8" endTime="17"/>
       <day id="tuesday" startTime="8" endTime="17"/>
@@ -9,10 +9,10 @@
       <day id="friday" startTime="9" endTime="16"/>
     </schedule>
     <properties>
-      <property key="capacity" value="30"/>
+      <property key="capacity" value="60"/>
     </properties>
   </resource>
-  <resource id="room2" name="Atari Breakout" type="room" pricePerHour="50">
+  <resource id="room2" name="Lilla Hallen" type="room" pricePerHour="50">
     <schedule>
       <day id="monday" startTime="12" endTime="16"/>
       <day id="tuesday" startTime="8" endTime="17"/>
@@ -20,7 +20,7 @@
       <day id="friday" startTime="9" endTime="16"/>
     </schedule>
     <properties>
-      <property key="capacity" value="10"/>
+      <property key="capacity" value="30"/>
     </properties>
   </resource>
 </resources>
