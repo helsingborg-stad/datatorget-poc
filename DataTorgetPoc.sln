@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "identitysvc", "identitysvc\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "valideringsapi", "valideringsapi\valideringsapi.csproj", "{4DE0125C-6667-4659-B57D-053C90BC5B19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "crmapi", "crmapi\crmapi.csproj", "{4CB25196-0540-4409-B195-66FC090D0A2A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "crmapi", "crmapi\crmapi.csproj", "{4CB25196-0540-4409-B195-66FC090D0A2A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "krakendconfig", "krakendconfig\krakendconfig.csproj", "{010C1DD7-9EE1-479E-9800-C0353E4B2D0D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -125,6 +127,18 @@ Global
 		{4CB25196-0540-4409-B195-66FC090D0A2A}.Release|x64.Build.0 = Release|Any CPU
 		{4CB25196-0540-4409-B195-66FC090D0A2A}.Release|x86.ActiveCfg = Release|Any CPU
 		{4CB25196-0540-4409-B195-66FC090D0A2A}.Release|x86.Build.0 = Release|Any CPU
+		{010C1DD7-9EE1-479E-9800-C0353E4B2D0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{010C1DD7-9EE1-479E-9800-C0353E4B2D0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{010C1DD7-9EE1-479E-9800-C0353E4B2D0D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{010C1DD7-9EE1-479E-9800-C0353E4B2D0D}.Debug|x64.Build.0 = Debug|Any CPU
+		{010C1DD7-9EE1-479E-9800-C0353E4B2D0D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{010C1DD7-9EE1-479E-9800-C0353E4B2D0D}.Debug|x86.Build.0 = Debug|Any CPU
+		{010C1DD7-9EE1-479E-9800-C0353E4B2D0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{010C1DD7-9EE1-479E-9800-C0353E4B2D0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{010C1DD7-9EE1-479E-9800-C0353E4B2D0D}.Release|x64.ActiveCfg = Release|Any CPU
+		{010C1DD7-9EE1-479E-9800-C0353E4B2D0D}.Release|x64.Build.0 = Release|Any CPU
+		{010C1DD7-9EE1-479E-9800-C0353E4B2D0D}.Release|x86.ActiveCfg = Release|Any CPU
+		{010C1DD7-9EE1-479E-9800-C0353E4B2D0D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

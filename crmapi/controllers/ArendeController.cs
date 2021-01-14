@@ -10,7 +10,7 @@ namespace crmapi.controllers
 {
     //[Authorize]
     [ApiController]
-    [Route("api/v1/bokning")]
+    [Route("api/v1/arende")]
     public class ArendeController : ControllerBase
     {
         [HttpGet]

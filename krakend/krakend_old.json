@@ -1,0 +1,177 @@
+{
+  "version": 2,
+  "extra_config": {
+    "github_com/devopsfaith/krakend-gologging": {
+      "level": "INFO",
+      "prefix": "[KRAKEND]",
+      "syslog": false,
+      "stdout": true,
+      "format": "default"
+    }
+  },
+  "timeout": "3000ms",
+  "cache_ttl": "300s",
+  "output_encoding": "json",
+  "name": "Datatorget",
+  "port": 30100,
+  "endpoints": [
+    {
+      "endpoint": "/api/v1/kund/lista",
+      "method": "GET",
+      "output_encoding": "json",
+      "extra_config": {},
+      "backend": [
+        {
+          "url_pattern": "/api/v1/kund/lista",
+          "encoding": "json",
+          "sd": "static",
+          "method": "GET",
+          "extra_config": {},
+          "disable_host_sanitize": true,
+          "is_collection": true,
+          "target": "",
+          "host": [
+            "http://svc-datatorgetbackend:30002"
+          ]
+        }
+      ]
+    },
+    {
+      "endpoint": "/api/v1/kund/skapa",
+      "method": "GET",
+      "output_encoding": "json",
+      "extra_config": {},
+      "backend": [
+        {
+          "url_pattern": "/api/v1/kund/skapa",
+          "encoding": "json",
+          "sd": "static",
+          "method": "GET",
+          "extra_config": {},
+          "disable_host_sanitize": true,
+          "host": [
+            "http://svc-datatorgetbackend:30002"
+          ]
+        }
+      ],
+      "querystring_params": [
+        "namn",
+        "personnr",
+        "epost"
+      ]
+    },
+    {
+      "endpoint": "/api/v1/kund/uppdatera",
+      "method": "GET",
+      "output_encoding": "json",
+      "extra_config": {},
+      "backend": [
+        {
+          "url_pattern": "/api/v1/kund/uppdatera",
+          "encoding": "json",
+          "sd": "static",
+          "method": "GET",
+          "extra_config": {},
+          "disable_host_sanitize": true,
+          "host": [
+            "http://svc-datatorgetbackend:30002"
+          ]
+        }
+      ],
+      "querystring_params": [
+        "namn",
+        "personnr",
+        "kundnr",
+        "epost"
+      ]
+    },
+    {
+      "endpoint": "/api/v1/kund/sokkundnr",
+      "method": "GET",
+      "output_encoding": "json",
+      "extra_config": {},
+      "backend": [
+        {
+          "url_pattern": "/api/v1/kund/sokkundnr",
+          "encoding": "json",
+          "sd": "static",
+          "method": "GET",
+          "extra_config": {},
+          "disable_host_sanitize": true,
+          "host": [
+            "http://svc-datatorgetbackend:30002"
+          ]
+        }
+      ],
+      "querystring_params": [
+        "kundnr"
+      ]
+    },
+    {
+      "endpoint": "/api/v1/kund/sokpersonnr",
+      "method": "GET",
+      "output_encoding": "json",
+      "extra_config": {},
+      "backend": [
+        {
+          "url_pattern": "/api/v1/kund/sokpersonnr",
+          "encoding": "json",
+          "sd": "static",
+          "method": "GET",
+          "extra_config": {},
+          "disable_host_sanitize": true,
+          "host": [
+            "http://svc-datatorgetbackend:30002"
+          ]
+        }
+      ],
+      "querystring_params": [
+        "sokpersonnr"
+      ]
+    },
+    {
+      "endpoint": "/ping",
+      "method": "GET",
+      "output_encoding": "json",
+      "extra_config": {
+        "github.com/devopsfaith/krakend/proxy": {
+          "static": {
+            "data": {
+              "new_field_a": 123,
+              "new_field_b": [
+                "arr1",
+                "arr2"
+              ],
+              "new_field_c": {
+                "obj": "obj1"
+              }
+            },
+            "strategy": "always"
+          }
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/swagger/index.html",
+          "encoding": "json",
+          "sd": "static",
+          "method": "GET",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-oauth2-clientcredentials": {
+              "endpoint_params": {},
+              "client_id": "webui",
+              "client_secret": "secret",
+              "token_url": "http://svc-datatorgetbackend:30099/connect/token",
+              "scopes": "datatorget1"
+            }
+          },
+          "host": [
+            "http://svc-datatorgetbackend:30001",
+            "http://fakeserver.none"
+          ],
+          "disable_host_sanitize": true
+        }
+      ]
+    }
+  ]
+}

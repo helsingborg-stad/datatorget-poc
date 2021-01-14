@@ -15,8 +15,7 @@ spec:
       volumes:
       - name: volume-krakend
         hostPath:
-            # path: "/c/Johan/Dev/datatorget-poc/kubernetes"
-            path: "/run/desktop/mnt/host/c/Johan/Dev/datatorget-poc/kubernetes"
+            path: "/run/desktop/mnt/host/c/Johan/Dev/datatorget-poc/krakend"
             type: Directory
       containers:
       - name: krakend

@@ -23,8 +23,8 @@ spec:
         - containerPort: 80
         env:
         - name: MS_BOOKING
-          value: http://193.180.109.41:30001
+          value: http://svc-datatorgetbackend:30001
         - name: MS_USER
-          value: http://193.180.109.41:30002
+          value: http://svc-datatorgetbackend:30002
         - name: MS_PAYMENT
-          value: http://193.180.109.41:30004
+          value: http://svc-datatorgetbackend:30004
