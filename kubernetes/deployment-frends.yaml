@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frends-agent-linux
+spec:
+  replicas: 1 # Increase this value to deploy HA Agents
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: frends
+  template:
+    metadata:
+      labels:
+        app: frends
+        # namespace : "helsingborg-onpremisetest"
+        frendsversion : "5.3.3.508"
+    spec:
+      terminationGracePeriodSeconds: 130
+      containers:
+      - name: frends-agent
+        image: frendsplatform/frends-agent-linux:5.3.3.508
+        readinessProbe:
+          httpGet:
+            path: /FrendsStatusInfo
+            port: 9900
+            httpHeaders:
+            - name: health-check-api-key
+              value: "0b857deb-71a2-4e3b-8957-ccd2c93eff1e"
+          failureThreshold: 2
+          periodSeconds: 5
+          timeoutSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /FrendsStatusInfoLiveness
+            port: 9900
+            httpHeaders:
+            - name: health-check-api-key
+              value: "0b857deb-71a2-4e3b-8957-ccd2c93eff1e"
+          failureThreshold: 2
+          initialDelaySeconds: 60
+          periodSeconds: 5
+          timeoutSeconds: 5
+        #startupProbe:
+        #  httpGet:
+        #    path: /FrendsStatusInfo
+        #    port: 9900
+        #  failureThreshold: 36
+        #  periodSeconds: 5
+        ports:
+        # - containerPort: 443
+        #   name: https
+        - containerPort: 80 # Remove if only using HTTPS
+          name: http
+        env:
+          - name: CONTAINER_HOST_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: HttpStatusPortString
+            value: "9900"
+          #- name: ASPNETCORE_ENVIRONMENT # uncomment for debug logging
+          #  value: "Development"         # uncomment for debug logging
+          - name: AgentName
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: TZ
+            value: Europe/Helsinki
+        resources:
+          requests:
+            memory: "500Mi"
+            cpu: "300m"
+          limits:
+            memory: "4000Mi"
+            cpu: "1000m"
+        volumeMounts:
+        - name: secrets-storage
+          mountPath: /secrets
+      volumes:
+      - name: secrets-storage
+        secret:
+          secretName: frends-agent-secrets
+          items:
+            - key: appsettings.secrets.json
+              path: appsettings.secrets.json

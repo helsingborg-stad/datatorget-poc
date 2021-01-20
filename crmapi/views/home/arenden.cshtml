@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "CRM Ärendelista";
+}
+
+<div class="text-center">
+    <h1 class="display-4">CRM Ärendelista</h1>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">ArendeId</th>
+                <th scope="col">Kundnr</th>
+                <th scope="col">Namn</th>
+                <th scope="col">Epost</th>
+                <th scope="col">Beskrivning</th>
+                <th scope="col">Avklarad</th>
+            </tr>
+        </thead>
+        <tbody>
+@foreach (var row in _DataStore.ListaArenden())
+{
+            <tr>
+                <td>@row.ArendeId</td>
+                <td>@row.Kundnr</td>
+                <td>@row.Namn</td>
+                <td>@row.Epost</td>
+                <td>@row.Beskrivning</td>
+                <td>
+                    @if (row.Completed)
+                    {
+                        <text>Ja</text>
+                    }
+                    else
+                    {
+                        <text>Nej</text>
+                    }
+                </td>
+            </tr>
+}
+        </tbody>
+    </table>
+</div>

@@ -340,3 +340,5 @@ ASALocalRun/
 healthchecksdb
 kubernetes/secrets-datatorgetbackend.yaml
 kubernetes/secrets-datatorgetbackend-local.yaml
+frends/secrets/appsettings.secrets.json
+kubernetes/secrets-frends-agent.yaml

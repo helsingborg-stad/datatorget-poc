@@ -12,7 +12,8 @@ namespace crmapi.code
 
         public static void SkapaArende(Arende arende)
         {
-            Arenden.Add(++SenasteArendeid, arende);
+            arende.ArendeId = ++SenasteArendeid;
+            Arenden.Add(arende.ArendeId, arende);
         }
 
         public static Arende[] ListaArenden()

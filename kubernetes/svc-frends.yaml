@@ -1,0 +1,26 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: frends
+  labels:
+    app: frends
+    # namespace : "helsingborg-onpremisetest"
+    frendsversion : "5.3.3.508" 
+spec:
+  #type: LoadBalancer
+  type: NodePort
+  selector:
+    app: frends
+  ports:
+  # - protocol: TCP
+  #   targetPort: 443
+  #   port: 443
+  #   name: https
+  # - protocol: TCP # Remove if only using HTTPS
+  #   targetPort: 80
+  #   port: 80
+  #   name: http
+    - name: http
+      port: 80
+      targetPort: 30098
+      nodePort: 30098

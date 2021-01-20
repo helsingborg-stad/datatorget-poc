@@ -30,8 +30,15 @@ namespace kopplingstjanst
             using (var connection = factory.CreateConnection())
             using (var model = connection.CreateModel())
             {
-                var svc1 = new BokningTillBetalorder(model, "bokning", _Config.BetalningsApi);
-                var svc2 = new BetalningTillBokning(model, "betalning", _Config.BokningApi);
+                //var svc1 = new BokningTillBetalorder(model, "bokning", _Config.BetalningsApi);
+                //var svc2 = new BetalningTillBokning(model, "betalning", _Config.BokningApi);
+
+                model.ExchangeDeclare(exchange: "bokning", type: ExchangeType.Fanout, durable: false, autoDelete: false);
+                model.QueueDeclare(queue: "bokning_frends", durable: false, exclusive: false, autoDelete: false);
+                model.QueueBind(queue: "bokning_frends", exchange: "bokning", routingKey: "");
+                model.ExchangeDeclare(exchange: "betalning", type: ExchangeType.Fanout, durable: false, autoDelete: false);
+                model.QueueDeclare(queue: "betalning_frends", durable: false, exclusive: false, autoDelete: false);
+                model.QueueBind(queue: "betalning_frends", exchange: "betalning", routingKey: "");
 
                 Console.WriteLine("Started successfully");
 

@@ -1,3 +1,4 @@
+30000 krakend
 30001 bokningsapi
 30002 kundapi
 30003 kommunikationsapi
@@ -5,8 +6,8 @@
 30005 valideringsapi
 30006 crmapi
 30080 web ui
+30098 frends
 30099 identitetsserver
-30100 krakend
 31001/5672 rabbitmq
 31002/27017 mongodb
 32001/15672 rabbitmq management

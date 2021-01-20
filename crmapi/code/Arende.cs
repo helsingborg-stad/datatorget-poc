@@ -8,10 +8,10 @@ namespace crmapi.code
     public class Arende
     {
         public int ArendeId { get; set; }
-        public string Lokal { get; set; }
+        public string Beskrivning { get; set; }
         public int Kundnr { get; set; }
         public string Namn { get; set; }
         public string Epost { get; set; }
-        public string Tidsintervall { get; set; }
+        public bool Completed { get; set; }
     }
 }

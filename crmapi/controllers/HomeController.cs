@@ -23,7 +23,7 @@ namespace crmapi.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Arenden()
         {
             return View();
         }

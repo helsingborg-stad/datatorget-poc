@@ -6,15 +6,17 @@ namespace bokningsapi.code
     {
         public string ResurstidId { get; set; }
         public string ResursId { get; set; }
+        public string ResursNamn { get; set; }
         public DateTime StartTid { get; set; }
         public DateTime SlutTid { get; set; }
         public int Bokningsnr { get; set; }
         public bool Tillganglig => Bokningsnr == 0;
 
-        public Resurstid(string resursid, DateTime starttid, DateTime sluttid, int bokningsnr)
+        public Resurstid(string resursid, string resursnamn, DateTime starttid, DateTime sluttid, int bokningsnr)
         {
             ResurstidId = GetId(resursid, starttid);
             ResursId = resursid;
+            ResursNamn = resursnamn;
             StartTid = starttid;
             SlutTid = sluttid;
             Bokningsnr = bokningsnr;

@@ -1,0 +1,169 @@
+piVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"svc-datatorgetbackend","namespace":"default"},"spec":{"ports":[{"name":"bokningsapi","nodePort":30001,"port":30001,"targetPort":30001},{"name":"kundapi","nodePort":30002,"port":30002,"targetPort":30002},{"name":"kommunikationsapi","nodePort":30003,"port":30003,"targetPort":30003},{"name":"betalningsapi","nodePort":30004,"port":30004,"targetPort":30004},{"name":"valideringsapi","nodePort":30005,"port":30005,"targetPort":30005},{"name":"crmapi","nodePort":30006,"port":30006,"targetPort":30006},{"name":"identitysvc","nodePort":30099,"port":30099,"targetPort":30099},{"name":"rabbitmq","nodePort":31001,"port":5672,"targetPort":5672},{"name":"rabbitmq-management","nodePort":32001,"port":15672,"targetPort":15672}],"selector":{"app":"datatorgetbackend"},"type":"NodePort"}}
+  creationTimestamp: "2020-12-09T17:31:55Z"
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:status:
+        f:loadBalancer:
+          f:ingress: {}
+    manager: kube-vpnkit-forwarder
+    operation: Update
+    time: "2020-12-09T17:31:55Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:spec:
+        f:externalTrafficPolicy: {}
+        f:ports:
+          .: {}
+          k:{"port":5672,"protocol":"TCP"}:
+            .: {}
+            f:name: {}
+            f:nodePort: {}
+            f:port: {}
+            f:protocol: {}
+            f:targetPort: {}
+          k:{"port":15672,"protocol":"TCP"}:
+            .: {}
+            f:name: {}
+            f:nodePort: {}
+            f:port: {}
+            f:protocol: {}
+            f:targetPort: {}
+          k:{"port":30001,"protocol":"TCP"}:
+            .: {}
+            f:name: {}
+            f:nodePort: {}
+            f:port: {}
+            f:protocol: {}
+            f:targetPort: {}
+          k:{"port":30002,"protocol":"TCP"}:
+            .: {}
+            f:name: {}
+            f:nodePort: {}
+            f:port: {}
+            f:protocol: {}
+            f:targetPort: {}
+          k:{"port":30003,"protocol":"TCP"}:
+            .: {}
+            f:name: {}
+            f:nodePort: {}
+            f:port: {}
+            f:protocol: {}
+            f:targetPort: {}
+          k:{"port":30004,"protocol":"TCP"}:
+            .: {}
+            f:name: {}
+            f:nodePort: {}
+            f:port: {}
+            f:protocol: {}
+            f:targetPort: {}
+          k:{"port":30099,"protocol":"TCP"}:
+            .: {}
+            f:name: {}
+            f:nodePort: {}
+            f:port: {}
+            f:protocol: {}
+            f:targetPort: {}
+        f:selector:
+          .: {}
+          f:app: {}
+        f:sessionAffinity: {}
+        f:type: {}
+    manager: kubectl-create
+    operation: Update
+    time: "2020-12-09T17:31:55Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:kubectl.kubernetes.io/last-applied-configuration: {}
+      f:spec:
+        f:ports:
+          k:{"port":30005,"protocol":"TCP"}:
+            .: {}
+            f:name: {}
+            f:nodePort: {}
+            f:port: {}
+            f:protocol: {}
+            f:targetPort: {}
+          k:{"port":30006,"protocol":"TCP"}:
+            .: {}
+            f:name: {}
+            f:nodePort: {}
+            f:port: {}
+            f:protocol: {}
+            f:targetPort: {}
+    manager: kubectl-client-side-apply
+    operation: Update
+    time: "2021-01-11T19:47:08Z"
+  name: svc-datatorgetbackend
+  namespace: default
+  resourceVersion: "931643"
+  selfLink: /api/v1/namespaces/default/services/svc-datatorgetbackend
+  uid: 895700d1-9083-40c6-8fa5-de57cb0dbacc
+spec:
+  clusterIP: 10.99.124.214
+  externalTrafficPolicy: Cluster
+  ports:
+  - name: bokningsapi
+    nodePort: 30001
+    port: 30001
+    protocol: TCP
+    targetPort: 30001
+  - name: kundapi
+    nodePort: 30002
+    port: 30002
+    protocol: TCP
+    targetPort: 30002
+  - name: kommunikationsapi
+    nodePort: 30003
+    port: 30003
+    protocol: TCP
+    targetPort: 30003
+  - name: betalningsapi
+    nodePort: 30004
+    port: 30004
+    protocol: TCP
+    targetPort: 30004
+  - name: valideringsapi
+    nodePort: 30005
+    port: 30005
+    protocol: TCP
+    targetPort: 30005
+  - name: crmapi
+    nodePort: 30006
+    port: 30006
+    protocol: TCP
+    targetPort: 30006
+  - name: identitysvc
+    nodePort: 30099
+    port: 30099
+    protocol: TCP
+    targetPort: 30099
+  - name: rabbitmq
+    nodePort: 31001
+    port: 5672
+    protocol: TCP
+    targetPort: 5672
+  - name: rabbitmq-management
+    nodePort: 32001
+    port: 15672
+    protocol: TCP
+    targetPort: 15672
+  selector:
+    app: datatorgetbackend
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer:
+    ingress:
+    - hostname: localhost

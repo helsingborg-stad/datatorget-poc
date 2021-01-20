@@ -78,6 +78,7 @@ namespace bokningsapi.code
             bokning.StartTid = startTid;
             bokning.SlutTid = slutTid;
             bokning.SenastUppdaterad = DateTime.Now;
+            bokning.UppdateraBeskrivning();
 
             _MessageService.Send(_Config.MessageServiceExchange, "", bokning);
             return true;

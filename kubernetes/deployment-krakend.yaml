@@ -13,10 +13,13 @@ spec:
         app: krakend
     spec:
       volumes:
-      - name: volume-krakend
-        hostPath:
-            path: "/run/desktop/mnt/host/c/Johan/Dev/datatorget-poc/krakend"
-            type: Directory
+      - name: volume-config-krakend
+        configMap:
+            name: config-krakend
+      # - name: volume-krakend
+      #   hostPath:
+      #       path: "/run/desktop/mnt/host/c/Johan/Dev/datatorget-poc/krakend"
+      #       type: Directory
       containers:
       - name: krakend
         image: devopsfaith/krakend
@@ -27,7 +30,11 @@ spec:
         # command: ["run"]
         # args: ["--config", "/etc/krakend/krakend.json "]
         ports:
-        - containerPort: 30100
+        - containerPort: 30000
+        # volumeMounts:
+        #   - mountPath: "/etc/krakend"
+        #     name: volume-krakend
         volumeMounts:
-          - mountPath: "/etc/krakend"
-            name: volume-krakend
+          - name: volume-config-krakend
+            mountPath: "/etc/krakend"
+            readOnly: true

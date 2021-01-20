@@ -17,6 +17,7 @@ namespace bokningsapi.code
         public bool Betald { get; set; }
         public bool Avbokad { get; set; }
         public DateTime SenastUppdaterad { get; set; }
+        public string Beskrivning { get; set; }
 
         public Bokning()
         {
@@ -35,6 +36,13 @@ namespace bokningsapi.code
             SenastUppdaterad = DateTime.Now;
             StartTid = startTid;
             SlutTid = slutTid;
+            
+            UppdateraBeskrivning();
+        }
+
+        public void UppdateraBeskrivning()
+        {
+            Beskrivning = string.Join(", ", Resurstider.Select(rt => $"{rt.ResursNamn}: {rt.StartTid.ToString("yyyy-MM-dd HH:mm")} - {rt.SlutTid.ToString("yyyy-MM-dd HH:mm")}"));
         }
     }
 }

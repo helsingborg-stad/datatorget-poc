@@ -48,7 +48,7 @@ namespace bokningsapi.code
                     dagsschema = HamtaDagsschema(tid.Date.DayOfWeek);
                 }
                 if (dagsschema != null && tid.Hour >= dagsschema.StartTid && tid.Hour < dagsschema.SlutTid)
-                    yield return new Resurstid(ResursId, tid, tid.AddHours(1), bokningsnr);
+                    yield return new Resurstid(ResursId, Namn, tid, tid.AddHours(1), bokningsnr);
             }
         }
 

@@ -40,25 +40,5 @@ spec:
     targetPort: 30099
     nodePort: 30099
 
-  - name: rabbitmq
-    port: 5672
-    targetPort: 5672
-    nodePort: 31001
-
-  - name: rabbitmq-management
-    port: 15672
-    targetPort: 15672
-    nodePort: 32001
-
-  # - name: mongo
-  #   port: 27017
-  #   targetPort: 27017
-  #   nodePort: 31002
-    
-  # - name: mongo-express
-  #   port: 8081
-  #   targetPort: 8081
-  #   nodePort: 32002
-
   selector:
     app: datatorgetbackend

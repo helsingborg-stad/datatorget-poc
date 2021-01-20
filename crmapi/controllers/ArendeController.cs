@@ -15,17 +15,24 @@ namespace crmapi.controllers
     {
         [HttpGet]
         [Route("skapa")]
-        public void SkapaArende(string epost, int kundnr, string lokal, string namn, string tidsintervall)
+        public void SkapaArende(string epost, int kundnr, string beskrivning, string namn)
         {
             var arende = new Arende
             {
                 Epost = epost,
                 Kundnr = kundnr,
-                Lokal = lokal,
+                Beskrivning = beskrivning,
                 Namn = namn,
-                Tidsintervall = tidsintervall
+                Completed = false
             };
             _DataStore.SkapaArende(arende);
+        }
+
+        [HttpGet]
+        [Route("lista")]
+        public Arende[] ListaArenden()
+        {
+            return _DataStore.ListaArenden();
         }
     }
 }

@@ -11,7 +11,7 @@ namespace krakendconfig
     {
         public static string Create()
         {
-            var ports = new int[] { 30001, 30002, 30003, 30004 };
+            var ports = new int[] { 30001, 30002, 30003, 30004, 30006 };
             var swaggerhost = "http://localhost";
             var backendhost = "http://svc-datatorgetbackend";
 
@@ -25,7 +25,7 @@ namespace krakendconfig
                 cache_ttl = "300s",
                 output_encoding = "json",
                 name = "Datatorget",
-                port = "30100",
+                port = "30000",
 
                 endpoints = ports.SelectMany(port => ParseEndpoint(swaggerhost, backendhost, port)).ToArray()
             };

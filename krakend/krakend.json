@@ -1,12 +1,11 @@
 {
   "version": 2,
-  "extra_config": {
-  },
+  "extra_config": {},
   "timeout": "3000ms",
   "cache_ttl": "300s",
   "output_encoding": "json",
   "name": "Datatorget",
-  "port": "30100",
+  "port": "30000",
   "endpoints": [
     {
       "endpoint": "/api/v1/bokning/lista",
@@ -542,6 +541,53 @@
         "kundnr",
         "betalorderid"
       ]
+    },
+    {
+      "endpoint": "/api/v1/arende/skapa",
+      "method": "GET",
+      "output_encoding": "json",
+      "extra_config": {},
+      "backend": [
+        {
+          "url_pattern": "/api/v1/arende/skapa",
+          "encoding": "json",
+          "sd": "static",
+          "method": "GET",
+          "disable_host_sanitize": true,
+          "is_collection": false,
+          "extra_config": {},
+          "host": [
+            "http://svc-datatorgetbackend:30006"
+          ]
+        }
+      ],
+      "querystring_params": [
+        "epost",
+        "kundnr",
+        "beskrivning",
+        "namn"
+      ]
+    },
+    {
+      "endpoint": "/api/v1/arende/lista",
+      "method": "GET",
+      "output_encoding": "json",
+      "extra_config": {},
+      "backend": [
+        {
+          "url_pattern": "/api/v1/arende/lista",
+          "encoding": "json",
+          "sd": "static",
+          "method": "GET",
+          "disable_host_sanitize": true,
+          "is_collection": true,
+          "extra_config": {},
+          "host": [
+            "http://svc-datatorgetbackend:30006"
+          ]
+        }
+      ],
+      "querystring_params": []
     }
   ]
 }
