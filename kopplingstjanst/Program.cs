@@ -36,9 +36,12 @@ namespace kopplingstjanst
                 model.ExchangeDeclare(exchange: "bokning", type: ExchangeType.Fanout, durable: false, autoDelete: false);
                 model.QueueDeclare(queue: "bokning_frends", durable: false, exclusive: false, autoDelete: false);
                 model.QueueBind(queue: "bokning_frends", exchange: "bokning", routingKey: "");
+
                 model.ExchangeDeclare(exchange: "betalning", type: ExchangeType.Fanout, durable: false, autoDelete: false);
                 model.QueueDeclare(queue: "betalning_frends", durable: false, exclusive: false, autoDelete: false);
+                model.QueueDeclare(queue: "betalning_frends2", durable: false, exclusive: false, autoDelete: false);
                 model.QueueBind(queue: "betalning_frends", exchange: "betalning", routingKey: "");
+                model.QueueBind(queue: "betalning_frends2", exchange: "betalning", routingKey: "");
 
                 Console.WriteLine("Started successfully");
 

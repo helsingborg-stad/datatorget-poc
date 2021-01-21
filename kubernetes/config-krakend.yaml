@@ -16,16 +16,15 @@ data:
         {
           "endpoint": "/api/v1/bokning/lista",
           "method": "GET",
-          "output_encoding": "json",
+          "output_encoding": "no-op",
           "extra_config": {},
           "backend": [
             {
               "url_pattern": "/api/v1/bokning/lista",
-              "encoding": "json",
+              "encoding": "no-op",
               "sd": "static",
               "method": "GET",
               "disable_host_sanitize": true,
-              "is_collection": true,
               "extra_config": {},
               "host": [
                 "http://svc-datatorgetbackend:30001"
@@ -41,16 +40,15 @@ data:
         {
           "endpoint": "/api/v1/bokning/hamta",
           "method": "GET",
-          "output_encoding": "json",
+          "output_encoding": "no-op",
           "extra_config": {},
           "backend": [
             {
               "url_pattern": "/api/v1/bokning/hamta",
-              "encoding": "json",
+              "encoding": "no-op",
               "sd": "static",
               "method": "GET",
               "disable_host_sanitize": true,
-              "is_collection": false,
               "extra_config": {},
               "host": [
                 "http://svc-datatorgetbackend:30001"
@@ -64,16 +62,15 @@ data:
         {
           "endpoint": "/api/v1/bokning/skapa",
           "method": "GET",
-          "output_encoding": "json",
+          "output_encoding": "no-op",
           "extra_config": {},
           "backend": [
             {
               "url_pattern": "/api/v1/bokning/skapa",
-              "encoding": "json",
+              "encoding": "no-op",
               "sd": "static",
               "method": "GET",
               "disable_host_sanitize": true,
-              "is_collection": false,
               "extra_config": {},
               "host": [
                 "http://svc-datatorgetbackend:30001"
@@ -90,16 +87,15 @@ data:
         {
           "endpoint": "/api/v1/bokning/avboka",
           "method": "GET",
-          "output_encoding": "json",
+          "output_encoding": "no-op",
           "extra_config": {},
           "backend": [
             {
               "url_pattern": "/api/v1/bokning/avboka",
-              "encoding": "json",
+              "encoding": "no-op",
               "sd": "static",
               "method": "GET",
               "disable_host_sanitize": true,
-              "is_collection": false,
               "extra_config": {},
               "host": [
                 "http://svc-datatorgetbackend:30001"
@@ -113,16 +109,15 @@ data:
         {
           "endpoint": "/api/v1/bokning/uppdateraBeloppBetalt",
           "method": "GET",
-          "output_encoding": "json",
+          "output_encoding": "no-op",
           "extra_config": {},
           "backend": [
             {
               "url_pattern": "/api/v1/bokning/uppdateraBeloppBetalt",
-              "encoding": "json",
+              "encoding": "no-op",
               "sd": "static",
               "method": "GET",
               "disable_host_sanitize": true,
-              "is_collection": false,
               "extra_config": {},
               "host": [
                 "http://svc-datatorgetbackend:30001"
@@ -137,16 +132,15 @@ data:
         {
           "endpoint": "/api/v1/bokning/uppdatera",
           "method": "GET",
-          "output_encoding": "json",
+          "output_encoding": "no-op",
           "extra_config": {},
           "backend": [
             {
               "url_pattern": "/api/v1/bokning/uppdatera",
-              "encoding": "json",
+              "encoding": "no-op",
               "sd": "static",
               "method": "GET",
               "disable_host_sanitize": true,
-              "is_collection": false,
               "extra_config": {},
               "host": [
                 "http://svc-datatorgetbackend:30001"
@@ -162,16 +156,15 @@ data:
         {
           "endpoint": "/api/v1/resurs/lista",
           "method": "GET",
-          "output_encoding": "json",
+          "output_encoding": "no-op",
           "extra_config": {},
           "backend": [
             {
               "url_pattern": "/api/v1/resurs/lista",
-              "encoding": "json",
+              "encoding": "no-op",
               "sd": "static",
               "method": "GET",
               "disable_host_sanitize": true,
-              "is_collection": true,
               "extra_config": {},
               "host": [
                 "http://svc-datatorgetbackend:30001"
@@ -183,16 +176,15 @@ data:
         {
           "endpoint": "/api/v1/resurs/hamta",
           "method": "GET",
-          "output_encoding": "json",
+          "output_encoding": "no-op",
           "extra_config": {},
           "backend": [
             {
               "url_pattern": "/api/v1/resurs/hamta",
-              "encoding": "json",
+              "encoding": "no-op",
               "sd": "static",
               "method": "GET",
               "disable_host_sanitize": true,
-              "is_collection": false,
               "extra_config": {},
               "host": [
                 "http://svc-datatorgetbackend:30001"
@@ -206,16 +198,15 @@ data:
         {
           "endpoint": "/api/v1/resurs/skapa",
           "method": "POST",
-          "output_encoding": "json",
+          "output_encoding": "no-op",
           "extra_config": {},
           "backend": [
             {
               "url_pattern": "/api/v1/resurs/skapa",
-              "encoding": "json",
+              "encoding": "no-op",
               "sd": "static",
               "method": "POST",
               "disable_host_sanitize": true,
-              "is_collection": false,
               "extra_config": {},
               "host": [
                 "http://svc-datatorgetbackend:30001"
@@ -227,16 +218,15 @@ data:
         {
           "endpoint": "/api/v1/resurstid/lista",
           "method": "GET",
-          "output_encoding": "json",
+          "output_encoding": "no-op",
           "extra_config": {},
           "backend": [
             {
               "url_pattern": "/api/v1/resurstid/lista",
-              "encoding": "json",
+              "encoding": "no-op",
               "sd": "static",
               "method": "GET",
               "disable_host_sanitize": true,
-              "is_collection": true,
               "extra_config": {},
               "host": [
                 "http://svc-datatorgetbackend:30001"
@@ -254,19 +244,18 @@ data:
         {
           "endpoint": "/api/v1/kund/skapa",
           "method": "GET",
-          "output_encoding": "json",
+          "output_encoding": "no-op",
           "extra_config": {},
           "backend": [
             {
               "url_pattern": "/api/v1/kund/skapa",
-              "encoding": "json",
+              "encoding": "no-op",
               "sd": "static",
               "method": "GET",
               "disable_host_sanitize": true,
-              "is_collection": false,
               "extra_config": {},
               "host": [
-                "http://svc-datatorgetbackend:30002"
+                "http://helsingborg-dev-agent.frendsapp.com"
               ]
             }
           ],
@@ -279,16 +268,15 @@ data:
         {
           "endpoint": "/api/v1/kund/uppdatera",
           "method": "GET",
-          "output_encoding": "json",
+          "output_encoding": "no-op",
           "extra_config": {},
           "backend": [
             {
               "url_pattern": "/api/v1/kund/uppdatera",
-              "encoding": "json",
+              "encoding": "no-op",
               "sd": "static",
               "method": "GET",
               "disable_host_sanitize": true,
-              "is_collection": false,
               "extra_config": {},
               "host": [
                 "http://svc-datatorgetbackend:30002"
@@ -305,16 +293,15 @@ data:
         {
           "endpoint": "/api/v1/kund/sokkundnr",
           "method": "GET",
-          "output_encoding": "json",
+          "output_encoding": "no-op",
           "extra_config": {},
           "backend": [
             {
               "url_pattern": "/api/v1/kund/sokkundnr",
-              "encoding": "json",
+              "encoding": "no-op",
               "sd": "static",
               "method": "GET",
               "disable_host_sanitize": true,
-              "is_collection": false,
               "extra_config": {},
               "host": [
                 "http://svc-datatorgetbackend:30002"
@@ -328,16 +315,15 @@ data:
         {
           "endpoint": "/api/v1/kund/sokpersonnr",
           "method": "GET",
-          "output_encoding": "json",
+          "output_encoding": "no-op",
           "extra_config": {},
           "backend": [
             {
               "url_pattern": "/api/v1/kund/sokpersonnr",
-              "encoding": "json",
+              "encoding": "no-op",
               "sd": "static",
               "method": "GET",
               "disable_host_sanitize": true,
-              "is_collection": false,
               "extra_config": {},
               "host": [
                 "http://svc-datatorgetbackend:30002"
@@ -351,16 +337,15 @@ data:
         {
           "endpoint": "/api/v1/kund/lista",
           "method": "GET",
-          "output_encoding": "json",
+          "output_encoding": "no-op",
           "extra_config": {},
           "backend": [
             {
               "url_pattern": "/api/v1/kund/lista",
-              "encoding": "json",
+              "encoding": "no-op",
               "sd": "static",
               "method": "GET",
               "disable_host_sanitize": true,
-              "is_collection": true,
               "extra_config": {},
               "host": [
                 "http://svc-datatorgetbackend:30002"
@@ -372,16 +357,15 @@ data:
         {
           "endpoint": "/api/v1/epost/skicka",
           "method": "POST",
-          "output_encoding": "json",
+          "output_encoding": "no-op",
           "extra_config": {},
           "backend": [
             {
               "url_pattern": "/api/v1/epost/skicka",
-              "encoding": "json",
+              "encoding": "no-op",
               "sd": "static",
               "method": "POST",
               "disable_host_sanitize": true,
-              "is_collection": false,
               "extra_config": {},
               "host": [
                 "http://svc-datatorgetbackend:30003"
@@ -397,16 +381,15 @@ data:
         {
           "endpoint": "/api/v1/epost/skickasenare",
           "method": "POST",
-          "output_encoding": "json",
+          "output_encoding": "no-op",
           "extra_config": {},
           "backend": [
             {
               "url_pattern": "/api/v1/epost/skickasenare",
-              "encoding": "json",
+              "encoding": "no-op",
               "sd": "static",
               "method": "POST",
               "disable_host_sanitize": true,
-              "is_collection": false,
               "extra_config": {},
               "host": [
                 "http://svc-datatorgetbackend:30003"
@@ -425,16 +408,15 @@ data:
         {
           "endpoint": "/api/v1/epost/avboka",
           "method": "GET",
-          "output_encoding": "json",
+          "output_encoding": "no-op",
           "extra_config": {},
           "backend": [
             {
               "url_pattern": "/api/v1/epost/avboka",
-              "encoding": "json",
+              "encoding": "no-op",
               "sd": "static",
               "method": "GET",
               "disable_host_sanitize": true,
-              "is_collection": false,
               "extra_config": {},
               "host": [
                 "http://svc-datatorgetbackend:30003"
@@ -448,16 +430,15 @@ data:
         {
           "endpoint": "/api/v1/epost/sok",
           "method": "GET",
-          "output_encoding": "json",
+          "output_encoding": "no-op",
           "extra_config": {},
           "backend": [
             {
               "url_pattern": "/api/v1/epost/sok",
-              "encoding": "json",
+              "encoding": "no-op",
               "sd": "static",
               "method": "GET",
               "disable_host_sanitize": true,
-              "is_collection": true,
               "extra_config": {},
               "host": [
                 "http://svc-datatorgetbackend:30003"
@@ -474,16 +455,15 @@ data:
         {
           "endpoint": "/api/v1/betalorder/skapa",
           "method": "GET",
-          "output_encoding": "json",
+          "output_encoding": "no-op",
           "extra_config": {},
           "backend": [
             {
               "url_pattern": "/api/v1/betalorder/skapa",
-              "encoding": "json",
+              "encoding": "no-op",
               "sd": "static",
               "method": "GET",
               "disable_host_sanitize": true,
-              "is_collection": false,
               "extra_config": {},
               "host": [
                 "http://svc-datatorgetbackend:30004"
@@ -501,16 +481,15 @@ data:
         {
           "endpoint": "/api/v1/betalorder/betala",
           "method": "GET",
-          "output_encoding": "json",
+          "output_encoding": "no-op",
           "extra_config": {},
           "backend": [
             {
               "url_pattern": "/api/v1/betalorder/betala",
-              "encoding": "json",
+              "encoding": "no-op",
               "sd": "static",
               "method": "GET",
               "disable_host_sanitize": true,
-              "is_collection": false,
               "extra_config": {},
               "host": [
                 "http://svc-datatorgetbackend:30004"
@@ -525,16 +504,15 @@ data:
         {
           "endpoint": "/api/v1/betalorder/sok",
           "method": "GET",
-          "output_encoding": "json",
+          "output_encoding": "no-op",
           "extra_config": {},
           "backend": [
             {
               "url_pattern": "/api/v1/betalorder/sok",
-              "encoding": "json",
+              "encoding": "no-op",
               "sd": "static",
               "method": "GET",
               "disable_host_sanitize": true,
-              "is_collection": true,
               "extra_config": {},
               "host": [
                 "http://svc-datatorgetbackend:30004"
@@ -551,16 +529,15 @@ data:
         {
           "endpoint": "/api/v1/arende/skapa",
           "method": "GET",
-          "output_encoding": "json",
+          "output_encoding": "no-op",
           "extra_config": {},
           "backend": [
             {
               "url_pattern": "/api/v1/arende/skapa",
-              "encoding": "json",
+              "encoding": "no-op",
               "sd": "static",
               "method": "GET",
               "disable_host_sanitize": true,
-              "is_collection": false,
               "extra_config": {},
               "host": [
                 "http://svc-datatorgetbackend:30006"
@@ -577,16 +554,15 @@ data:
         {
           "endpoint": "/api/v1/arende/lista",
           "method": "GET",
-          "output_encoding": "json",
+          "output_encoding": "no-op",
           "extra_config": {},
           "backend": [
             {
               "url_pattern": "/api/v1/arende/lista",
-              "encoding": "json",
+              "encoding": "no-op",
               "sd": "static",
               "method": "GET",
               "disable_host_sanitize": true,
-              "is_collection": true,
               "extra_config": {},
               "host": [
                 "http://svc-datatorgetbackend:30006"

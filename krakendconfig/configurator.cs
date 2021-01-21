@@ -39,10 +39,10 @@ namespace krakendconfig
             var parser = new Swagger(data);
 
             IEnumerable<object> jobj = parser.GetPaths().Select(path => new { 
-                endpoint = path, method = parser.GetMethod(path), output_encoding = "json", extra_config = new { },
+                endpoint = path, method = parser.GetMethod(path), output_encoding = "no-op", extra_config = new { },
                 backend = new[] { new {
-                    url_pattern = path, encoding = "json", sd = "static", method = parser.GetMethod(path), disable_host_sanitize = true,
-                    is_collection = parser.IsArrayResponse(path), extra_config = new { }, host = new[] { $"{backendhost}:{port}" } }
+                    url_pattern = path, encoding = "no-op", sd = "static", method = parser.GetMethod(path), disable_host_sanitize = true,
+                    extra_config = new { }, host = new[] { $"{backendhost}:{port}" } }
                 },
                 querystring_params = parser.GetQueryParams(path)
             });
