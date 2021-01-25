@@ -33,7 +33,8 @@
     ],
     "require": {
         "erusev/parsedown": "^1.7",
-        "helsingborg-stad/blade-engine-wrapper": "dev-master"
+        "helsingborg-stad/blade-engine-wrapper": "dev-master",
+        "jumbojett/openid-connect-php": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [

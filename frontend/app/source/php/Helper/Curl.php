@@ -2,6 +2,8 @@
 
 namespace HbgStyleGuide\Helper;
 
+use Jumbojett\OpenIDConnectClient;
+
 class Curl
 {
     public $response = false;
@@ -9,10 +11,25 @@ class Curl
 
     public function __construct($type, $url, $data = null, $contentType = 'json', $headers = null)
     {
-
         //Arguments are stored here
         $arguments = null;
 
+        //Oauth 
+        if(!isset($_COOKIE['oauthSessionCookie'])) {
+            $token = $this->oAuthToken(); 
+            if(!empty($token)) {
+                setcookie('oauthSessionCookie', $token, time() + (3000), "/");
+            }
+        } else {
+            $token = $_COOKIE['oauthSessionCookie']; 
+        }
+
+        if(!is_array($headers)) {
+            $headers = []; 
+        }
+        
+        $headers[] = "Authorization: OAuth " . $token;
+        
         switch (strtoupper($type)) {
             /**
              * Method: GET
@@ -47,7 +64,7 @@ class Curl
                     CURLOPT_POST                => 1,
                     CURLOPT_HEADER              => false,
                     CURLOPT_POSTFIELDS          => http_build_query($data),
-                    CURLOPT_CONNECTTIMEOUT_MS  => 3000,
+                    CURLOPT_CONNECTTIMEOUT_MS   => 3000,
                     CURLOPT_REFERER             =>  get_option('home_url')
                 );
 
@@ -102,5 +119,23 @@ class Curl
          * Return the response
          */
         $this->response = $response;
+    }
+
+    private function oAuthToken() {
+
+        $oidc = new OpenIDConnectClient(
+            'http://datatorget2.helsingborg.se:30099',
+            'webui',
+            'secret'
+        );
+
+        $oidc->providerConfigParam(
+            array('token_endpoint'=>'http://datatorget2.helsingborg.se:30099/connect/token')
+        );
+
+        $oidc->addScope('datatorget1');
+
+        return $oidc->requestClientCredentialsToken()->access_token;
+                
     }
 }

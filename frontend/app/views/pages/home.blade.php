@@ -27,6 +27,8 @@
                 'attributeList' => [
                     'type' => 'number',
                     'name' => 'pnr',
+                    'maxlength' => '10',
+                    'minlength' => '10'
                 ],
                 'label' => "Ange ditt personnummer"
             ])
