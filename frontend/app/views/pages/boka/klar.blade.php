@@ -21,7 +21,7 @@
     ])
 
     @typography([])
-      Din bokning är nu genomförd. Du kommer inom kort få en bekräftelse på din bokning skickad via e-post. Via "Mitt konto" har du möjlighet till att hantera dina bokningar.
+      Din bokning är genomförd. Du kommer inom kort få en bekräftelse på din bokning skickad via e-post. Via <a href="/mitt-konto">"Mitt konto"</a> har du möjlighet till att hantera dina bokningar.
     @endtypography
 
     <div class="o-grid">

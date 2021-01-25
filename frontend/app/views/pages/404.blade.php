@@ -17,7 +17,7 @@
             'element' => 'p',
             'variant' => 'subtitle'
         ])
-            We cannot find that, have you looked in the refrigerator?
+            Vi kan inte hitta det där, har du kikat i kylskåpet? 
         @endtypography
 
         @code(['language' => 'php', 'content' => ''])

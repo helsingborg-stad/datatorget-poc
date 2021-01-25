@@ -4,7 +4,7 @@
     @notice([
         'type' => 'warning',
         'message' => [
-            'text' => '<strong>Använd inte riktiga personuppgifter!</strong><p>Det här är en proo-of-concept applikation som inte uppfyller de säkerhetskrav som normalt ställs på applikationer som hanterar personuppgifter. Använd därför inga riktiga personuppgifter vid registrering.</p>',
+            'text' => '<strong>Använd inte riktiga personuppgifter!</strong><p>Det här är en proof-of-concept applikation som inte uppfyller de säkerhetskrav som normalt ställs på applikationer som hanterar personuppgifter. Använd därför inga riktiga personuppgifter vid registrering.</p>',
             'size' => 'sm'
         ],
         'icon' => [
