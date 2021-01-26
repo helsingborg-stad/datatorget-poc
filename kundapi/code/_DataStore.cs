@@ -28,6 +28,9 @@ namespace kundapi.code
 
         public static void LaggTillNyKund(Kund kund)
         {
+            if (ListaKunder().Any(k => k.Personnr == kund.Personnr || k.Epost == kund.Epost))
+                throw new Exception("Detta personnr eller epost finns redan i kundregistret.");
+
             if (_Config.MongoDbEnabled && SenasteKundnr == 0)
                 SenasteKundnr = (int)_MongoDb.GetCount<Kund>();
 

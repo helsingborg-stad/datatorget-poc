@@ -28,9 +28,9 @@ namespace bokningsapi.controllers
                 resurser = _DataStore.AllaResurser;
 
             if (!startTid.HasValue)
-                startTid = DateTime.Today;
+                startTid = DateTime.Today.AddHours(DateTime.Now.Hour);
             if (!slutTid.HasValue)
-                slutTid = DateTime.Today.AddDays(7);
+                slutTid = DateTime.Today.AddHours(DateTime.Now.Hour).AddDays(7);
             
             var results = new List<Resurstid>();
             foreach (var resource in resurser)
