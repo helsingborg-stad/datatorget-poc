@@ -28,7 +28,7 @@ class Curl
             $headers = []; 
         }
         
-        $headers[] = "Authorization: OAuth " . $token;
+        $headers[] = "Authorization: Bearer " . $token;
         
         switch (strtoupper($type)) {
             /**
@@ -36,7 +36,7 @@ class Curl
              */
             case 'GET':
                 // Append $data as querystring to $url
-                if (is_array($data)) {
+                if (is_array($data) && !empty($data)) {
                     $url .= '?' . http_build_query($data);
                 }
 
@@ -92,8 +92,8 @@ class Curl
          */
         $ch = curl_init();
         curl_setopt_array($ch, $arguments);
-        $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $response = curl_exec($ch);
+        $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 
         /**
@@ -116,11 +116,26 @@ class Curl
         }
 
         /**
+         * Debugging curl
+         */
+        if(isset($_GET['curldebug'])) {
+            echo '<pre>'; 
+                var_dump(array_merge((array) $response, ['httpCode' => $httpcode], $arguments)); 
+            echo '</pre>'; 
+            die("Curl debug done."); 
+        }
+
+        /**
          * Return the response
          */
         $this->response = $response;
     }
 
+    /**
+     * Get a token
+     *
+     * @return string
+     */
     private function oAuthToken() {
 
         $oidc = new OpenIDConnectClient(
@@ -134,7 +149,6 @@ class Curl
         );
 
         $oidc->addScope('datatorget1');
-
         return $oidc->requestClientCredentialsToken()->access_token;
                 
     }
