@@ -41,7 +41,7 @@ spec:
         - name: MESSAGE_SERVICE_ENABLED
           value: "True"
         - name: OAUTH_AUTHORITY
-          value: "http://svc-datatorgetbackend:30099"
+          value: "http://datatorget2.helsingborg.se:30099"
 
       - name: kundapi
         image: datatorgetpoc/kundapi
@@ -71,7 +71,7 @@ spec:
         - name: MESSAGE_SERVICE_ENABLED
           value: "True"
         - name: OAUTH_AUTHORITY
-          value: "http://svc-datatorgetbackend:30099"
+          value: "http://datatorget2.helsingborg.se:30099"
           
       - name: kommunikationsapi
         image: datatorgetpoc/kommunikationsapi
@@ -102,7 +102,7 @@ spec:
               name: secrets-datatorgetbackend
               key: SENDGRID_APIKEY
         - name: OAUTH_AUTHORITY
-          value: "http://svc-datatorgetbackend:30099"
+          value: "http://datatorget2.helsingborg.se:30099"
 
       - name: betalningsapi
         image: datatorgetpoc/betalningsapi
@@ -132,7 +132,7 @@ spec:
         - name: MESSAGE_SERVICE_ENABLED
           value: "True"
         - name: OAUTH_AUTHORITY
-          value: "http://svc-datatorgetbackend:30099"
+          value: "http://datatorget2.helsingborg.se:30099"
 
       - name: valideringsapi
         image: datatorgetpoc/valideringsapi
@@ -144,7 +144,7 @@ spec:
         - containerPort: 30005
         env:
         - name: OAUTH_AUTHORITY
-          value: "http://svc-datatorgetbackend:30099"
+          value: "http://datatorget2.helsingborg.se:30099"
 
       - name: crmapi
         image: datatorgetpoc/crmapi
@@ -156,7 +156,7 @@ spec:
         - containerPort: 30006
         env:
         - name: OAUTH_AUTHORITY
-          value: "http://svc-datatorgetbackend:30099"
+          value: "http://datatorget2.helsingborg.se:30099"
 
       - name: kopplingstjanst
         image: datatorgetpoc/kopplingstjanst
@@ -184,7 +184,7 @@ spec:
         - name: BOKNINGSAPI
           value: "http://localhost:30001/api/v1"
         - name: OAUTH_AUTHORITY
-          value: "http://svc-datatorgetbackend:30099"
+          value: "http://datatorget2.helsingborg.se:30099"
 
       - name: identitysvc
         image: datatorgetpoc/identitysvc
@@ -194,4 +194,4 @@ spec:
             cpu: "100m"
         env:
         - name: OAUTH_AUTHORITY
-          value: "http://svc-datatorgetbackend:30099"
+          value: "http://datatorget2.helsingborg.se:30099"
